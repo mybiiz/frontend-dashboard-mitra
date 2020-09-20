@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="description" content="Responsive Admin Template" />
+    <meta name="author" content="SmartUniversity" />
+    <title>Tambah Mobil | Mitra MyBiiz</title>
+	<!-- icons -->
+    <link href="assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<!--bootstrap -->
+	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<!-- Material Design Lite CSS -->
+	<link rel="stylesheet" href="assets/plugins/material/material.min.css">
+	<link rel="stylesheet" href="assets/css/material_style.css">
+	<!-- animation -->
+	<link href="assets/css/pages/animate_page.css" rel="stylesheet">
+	<!-- Template Styles -->
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/theme-color.css" rel="stylesheet" type="text/css" />
+	<!-- dropzone -->
+    <link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet" media="screen">
+    <!-- Date Time item CSS -->
+    <link rel="stylesheet" href="assets/plugins/flatpicker/flatpickr.min.css">
+	<!-- favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" /> 
+</head>
+<!-- END HEAD -->
+<body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white custom-sidebar-color logo-custom">
+    <div class="page-wrapper">
+		<!-- start header -->
+		<div class="page-header navbar navbar-fixed-top">
+			<div class="page-header-inner ">
+				<!-- logo start -->
+				<div class="page-logo">
+					<a href="index.html">
+						<img alt="" src="assets/img/logo.png">
+				</div>
+				<!-- logo end -->
+				<!-- start mobile menu -->
+				<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span></span>
+				</a>
+				<!-- end mobile menu -->
+				<!-- start header menu -->
+				<div class="top-menu">
+					<ul class="nav navbar-nav pull-right">
+						<!-- start notification dropdown -->
+						<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+								data-close-others="true">
+								<i class="fa fa-bell-o"></i>
+								<span class="badge headerBadgeColor1"> {{Jumlah Notif}} </span>
+							</a>
+							<ul class="dropdown-menu animated swing">
+								<li class="external">
+									<h3><span class="bold">Notifications</span></h3>
+								</li>
+								<li>
+									<ul class="dropdown-menu-list small-slimscroll-style" data-handle-color="#637283">
+										<li>
+											<a href="javascript:;">
+												<span class="time">{{time notif}}</span>
+												<span class="details">
+													<span class="notification-icon circle deepPink-bgcolor"><i
+															class="fa fa-check"></i></span> {{notif tittle}} </span>
+											</a>
+										</li>
+									</ul>
+									<div class="dropdown-menu-footer">
+										<a href="javascript:void(0)"> All notifications </a>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<!-- end notification dropdown -->
+						<!-- start manage user dropdown -->
+						<li class="dropdown dropdown-user">
+							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+								data-close-others="true">
+								<img alt="" class="img-circle " src="../../" /> <!--foto user-->
+								<span class="username username-hide-on-mobile"> {{Username}} </span>
+								<i class="fa fa-angle-down"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-menu-default animated jello">
+								<li>
+									<a href="user_profile.html">
+										<i class="icon-user"></i> Profile </a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="icon-settings"></i> Settings
+									</a>
+								</li>
+								<li class="divider"> </li>
+								<li>
+									<a href="login.html">
+										<i class="icon-logout"></i> Log Out </a>
+								</li>
+							</ul>
+						</li>
+						<!-- end manage user dropdown -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- end header -->
+        <!-- start page container -->
+        <div class="page-container">
+			<!-- start sidebar menu -->
+			<div class="sidebar-container">
+				<div class="sidemenu-container navbar-collapse collapse fixed-menu">
+					<div id="remove-scroll">
+						<ul class="sidemenu page-header-fixed p-t-20" data-keep-expanded="false" data-auto-scroll="true"
+							data-slide-speed="200">
+							<li class="sidebar-toggler-wrapper hide">
+								<div class="sidebar-toggler">
+									<span></span>
+								</div>
+							</li>
+							<li class="sidebar-user-panel">
+								<div class="user-panel">
+									<div class="row">
+										<div class="sidebar-userpic">
+											<img src="assets/img/dp.jpg" class="img-responsive" alt=""> </div>
+									</div>
+									<div class="profile-usertitle">
+										<div class="sidebar-userpic-name"> {{user.name}} </div>
+									</div>
+									<div class="sidebar-userpic-btn">
+										<a class="tooltips" href="user_profile.html" data-placement="top"
+											data-original-title="Profile">
+											<i class="material-icons">person_outline</i>
+										</a>
+										<a class="tooltips" href="chat.html" data-placement="top"
+											data-original-title="Chat">
+											<i class="material-icons">chat</i>
+										</a>
+										<a class="tooltips" href="login.html" data-placement="top"
+											data-original-title="Logout">
+											<i class="material-icons">input</i>
+										</a>
+									</div>
+								</div>
+							</li>
+							<li class="nav-item start active">
+								<a href="index.html" class="nav-link">
+									<i class="material-icons">dashboard</i>
+									<span class="title">Dashboard</span>
+									<span class="selected"></span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="#" class="nav-link nav-toggle">
+									<i class="material-icons">business_center</i>
+									<span class="title">Booking</span>
+									<span class="arrow"></span>
+								</a>
+								<ul class="sub-menu">
+									<li class="nav-item">
+										<a href="add_book_mobil.html" class="nav-link ">
+											<span class="title">Booking Baru</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="book_mobil.html" class="nav-link ">
+											<span class="title">Lihat Booking</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav-item">
+								<a href="#" class="nav-link nav-toggle">
+									<i class="material-icons">local_taxi</i>
+									<span class="title">Mobil</span>
+									<span class="arrow"></span>
+								</a>
+								<ul class="sub-menu">
+									<li class="nav-item">
+										<a href="add_mobil.html" class="nav-link ">
+											<span class="title">Tambah Mobil</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="all_mobil.html" class="nav-link ">
+											<span class="title">Daftar Mobil</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="edit_mobil.html" class="nav-link ">
+											<span class="title">Edit Mobil</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- end sidebar menu -->
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Tambah Mobil</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="">Mobil</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Tambah Mobil</li>
+                            </ol>
+                        </div>
+                    </div>
+                     <div class="row">
+							<div class="col-sm-12">
+								<div class="card-box">
+									<div class="card-head">
+										<header>Detail Kendaraan</header>
+									</div>
+									<div class="card-body row">
+							            <div class="col-lg-6 p-t-20"> 
+							              <div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+						                     <input class = "mdl-textfield__input" type = "text" id = "txtModeltName">
+						                     <label class = "mdl-textfield__label">Nama Mobil</label>
+						                  </div>
+							            </div>
+							            <div class="col-lg-6 p-t-20"> 
+							              <div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+						                     <input class = "mdl-textfield__input" type = "text" id = "txtModelNumber">
+						                     <label class = "mdl-textfield__label" >Plat Nomor</label>
+						                  </div>
+							            </div>
+							            <div class="col-lg-6 p-t-20"> 
+							              <div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+						                     <input class = "mdl-textfield__input" type = "text" id = "txtModelYear">
+						                     <label class = "mdl-textfield__label" >Tahun Kendaraan</label>
+						                  </div>
+							            </div>
+							            <div class="col-lg-6 p-t-20"> 
+							              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+									            <input class="mdl-textfield__input" type="text" id="sample2" value="" readonly tabIndex="-1">
+									            <label for="sample2" class="pull-right margin-0">
+									                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+									            </label>
+									            <label for="sample2" class="mdl-textfield__label">Tipe Kendaraan</label>
+									            <ul data-mdl-for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+									                <li class="mdl-menu__item" data-val="1">Sedan</li>
+									                <li class="mdl-menu__item" data-val="2">SUV</li>
+									                <li class="mdl-menu__item" data-val="3">Bus</li>
+									                <li class="mdl-menu__item" data-val="4">Carriage</li>
+									                <li class="mdl-menu__item" data-val="5">Bike</li>
+									            </ul>
+									        </div>
+							            </div>
+							            <div class="col-lg-6 p-t-20"> 
+							              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+									            <input class="mdl-textfield__input" type="text" id="sample3" value="" readonly tabIndex="-1">
+									            <label for="sample2" class="pull-right margin-0">
+									                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+									            </label>
+									            <label for="sample3" class="mdl-textfield__label">Tipe Bahan Bakar</label>
+									            <ul data-mdl-for="sample3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+									                <li class="mdl-menu__item" data-val="1">Bensin/Pertalite</li>
+									                <li class="mdl-menu__item" data-val="2">Diesel</li>
+									                <li class="mdl-menu__item" data-val="3">Pertamax</li>
+									            </ul>
+									        </div>
+							            </div>
+							            <div class="col-lg-6 p-t-20"> 
+							              <div class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+						                     <input class = "mdl-textfield__input" type = "text" id = "driverName">
+						                     <label class = "mdl-textfield__label" >Kapasitas</label>
+						                  </div>
+							            </div>
+							            <div class="col-lg-12 p-t-20">
+							            <label class="control-label col-md-3">Upload Foto Kendaraan</label>
+							             <form id="id_dropzone" class="dropzone">
+												<div class="dz-message">
+													<div class="dropIcon">
+														<i class="material-icons">cloud_upload</i>
+													</div>
+													<h3>Seret gambar atau klik untuk mengunggah.</h3>
+												</div>
+											</form>
+	                                       </div>
+                                        <div class="col-lg-12 p-t-20"> 
+							              <div class = "mdl-textfield mdl-js-textfield txt-full-width">
+						                     <textarea class = "mdl-textfield__input" rows =  "4" 
+						                        id = "education" ></textarea>
+						                     <label class = "mdl-textfield__label" >Deskripsi</label>
+						                  </div>
+								         </div>
+								         <div class="col-lg-12 p-t-20 text-center"> 
+							              	<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Submit</button>
+											<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
+							            </div>
+									</div>
+								</div>
+							</div>
+						</div> 
+                </div>
+            </div>
+            <!-- end page content -->
+        </div>
+        <!-- end page container -->
+		<!-- start footer -->
+		<div class="page-footer">
+			<div class="page-footer-inner"> 2020 &copy;
+				<a href="https://mybiiz.com" target="_top" class="makerCss">MyBiiz</a>
+			</div>
+			<div class="scroll-to-top">
+				<i class="icon-arrow-up"></i>
+			</div>
+		</div>
+		<!-- end footer -->
+    </div>
+    <!-- start js include path -->
+    <script src="assets/plugins/jquery/jquery.min.js" ></script>
+    <script src="assets/plugins/popper/popper.min.js" ></script>
+    <script src="assets/plugins/jquery-blockui/jquery.blockui.min.js" ></script>
+	<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- bootstrap -->
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" ></script>
+    <!-- Common js-->
+	<script src="assets/js/app.js" ></script>
+    <script src="assets/js/layout.js" ></script>
+	<script src="assets/js/theme-color.js" ></script>
+	<!-- Material -->
+	<script src="assets/plugins/material/material.min.js"></script>
+    <script src="assets/js/pages/material_select/getmdl-select.js" ></script>
+    <!-- dropzone -->
+    <script src="assets/plugins/dropzone/dropzone.js" ></script>
+    <script src="assets/plugins/dropzone/dropzone-call.js" ></script>
+    <!-- animation -->
+	<script src="assets/js/pages/ui/animations.js" ></script>
+	<!-- date and time 	 -->
+	<script  src="assets/plugins/flatpicker/flatpickr.min.js"></script>
+	<script  src="assets/js/pages/datetime/datetime-data.js"></script>
+    <!-- end js include path -->
+</body>
+</html>
