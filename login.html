@@ -31,11 +31,11 @@
 						Log In Mitra MyBiiz
 					</span>
 					<div class="wrap-input100 validate-input" data-validate="Email">
-						<input class="input100" type="text" name="Email" placeholder="Email">
+						<input id="email-input" class="input100" type="text" name="Email" placeholder="Email">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input id="password-input" class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 					<div class="contact100-form-checkbox">
@@ -45,7 +45,7 @@
 						</label>
 					</div>
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button type="submit" id="login-btn" class="login100-form-btn">
 							Login
 						</button>
 					</div>
@@ -69,6 +69,42 @@
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/pages/extra_pages/login.js"></script>
 	<!-- end js include path -->
+	<script>
+		if (localStorage.getItem("apiKey")) {
+			window.location = '/index'
+		}
+
+		document.querySelector('#login-btn').addEventListener('click', async e => {
+			e.preventDefault()
+
+			const email = document.querySelector('#email-input').value
+			const password = document.querySelector('#password-input').value
+
+			console.log('Logging in', email, password)
+
+			const apiUrlResponse = await fetch('/api_url.txt')
+			const apiUrl = await apiUrlResponse.text()
+
+			console.log(apiUrl)
+			try {
+				const response = await fetch(`${apiUrl}/login`, {
+					method: 'post',
+					headers: {
+						'content-type': 'application/json'
+					},
+					body: JSON.stringify({ email: email, password: password })
+				})
+
+				if (response.status !== 200) throw 'Login error! please check email and password.'	
+				const jwt = await response.text()
+				localStorage.setItem("apiKey", jwt)
+
+				window.location = '/index'
+			} catch (e) {
+				alert(e)
+			}
+		})
+	</script>
 </body>
 
 </html>

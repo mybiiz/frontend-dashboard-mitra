@@ -77,6 +77,11 @@
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/pages/extra_pages/login.js"></script>
 	<!-- end js include path -->
+	<script>
+		if (!localStorage.getItem("apiKey")) {
+			window.location = "/login";
+		}
+	</script>
 </body>
 
 </html>
