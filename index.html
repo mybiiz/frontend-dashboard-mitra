@@ -30,6 +30,11 @@
 					<span class="login100-form-title p-b-34 p-t-27">
 						Selamat Datang, <span id="user-name"></span>!
 					</span>
+					<div class="my-2 d-flex justify-content-center">
+						<button id="logout-btn" class="btn btn-danger">
+							Logout
+						</button>	
+					</div>
 					<div class="center">
 						<div class="col-lg-60 p-t-20">
 							<div class="container-login100-form-btn">
@@ -112,6 +117,12 @@
 			window.location = "/login.html"
 		} else {  
 			fetchData()
+		
+			document.querySelector('#logout-btn').addEventListener('click', e => {
+				e.preventDefault()
+				localStorage.removeItem('apiKey')
+				window.location = '/login.html'
+			})
 		}
 	</script>
 </body>
