@@ -83,72 +83,40 @@
 	<script src="assets/js/pages/extra_pages/login.js"></script>
 	<!-- end js include path -->
 	<script>
-		const emailRegex = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
-
-		let initialUser = {
-			user: {
-				email: "",
-				password: "",
-				serviceType: null
-			},
-			partner: { 
-				phone: ""
-			}
-		}
-
-		let passwordConfirm = ""
-
-
-		document.querySelector('#phone-input').addEventListener('input', e => {
-			initialUser = { 
-				...initialUser,
-				partner: {
-					...initialUser.partner,
-					phone: e.target.value
-				}
-			}	
-		})
-
-		document.querySelector('#email-input').addEventListener('input', e => {
-			initialUser = { 
-				...initialUser,
-				user: {
-					...initialUser.user,
-					email: e.target.value
-				}
-			}	
-		})
-
-		document.querySelector('#password-input').addEventListener('input', e => {
-			initialUser = { 
-				...initialUser,
-				user: {
-					...initialUser.user,
-					password: e.target.value
-				}
-			}	
-		})
-
-		document.querySelector('#password-confirm-input').addEventListener('input', e => {
-			passwordConfirm = e.target.value
-		})
+		const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 		document.querySelector('#signup-btn').addEventListener('click', async e => {
 			e.preventDefault()
+			
+			const phone = document.querySelector('#phone-input').value
+			const email =  document.querySelector('#email-input').value
+			const password = document.querySelector('#password-input').value
+			const passwordConfirm = document.querySelector('#password-confirm-input').value
 
-			if (initialUser.partner.phone === "") {
+			if (phone === "") {
 				alert('Harap isi nomor telepon.')
-			} else if (initialUser.user.email === "") {
+			} else if (email === "") {
 				alert('Harap isi email.')
-			} else if (!initialUser.user.email.match(emailRegex)) {
+			} else if (!email.match(emailRegex)) {
 				alert('Harap input email yg valid.')
-			} else if (initialUser.user.password === "") {
+			} else if (password === "") {
 				alert('Harap isi password.')
-			} else if (initialUser.user.password !== passwordConfirm) {
+			} else if (password !== passwordConfirm) {
 				alert('Password tidak match.')
 			} else {
 				const apiUrlResponse = await fetch(`/api_url.txt`)
 				const apiUrl = await apiUrlResponse.text()
+
+				let initialUser = {
+					user: {
+						email: email,
+						password: password,
+						serviceType: null
+					},
+					partner: { 
+						phone: phone
+					}
+				}
 
 				try {
 					const response = await fetch(`${apiUrl}/register`, {
