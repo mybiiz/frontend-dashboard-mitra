@@ -28,7 +28,7 @@
 						<i class="zmdi zmdi-account"></i>
 					</span>
 					<span class="login100-form-title p-b-34 p-t-27">
-						Selamat Datang, {{Nama.User}} !
+						Selamat Datang, <span id="user-name"></span>!
 					</span>
 					<div class="center">
 						<div class="col-lg-60 p-t-20">
@@ -76,10 +76,42 @@
 	<!-- bootstrap -->
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/pages/extra_pages/login.js"></script>
+	<!-- JWT Decode -->
+	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.0.0-beta.2/build/jwt-decode.cjs.min.js"></script>
 	<!-- end js include path -->
 	<script>
-		if (!localStorage.getItem("apiKey")) {
-			window.location = "/login.html";
+		let apiKey = localStorage.getItem("apiKey")
+		let apiUrl = ""
+
+		const fetchUser = async () => {
+			try {
+				const response = await fetch(`${apiUrl}/users/${jwtDecode(apiKey)?.id}`)
+				const userResponse = await response.json()
+				
+				return userResponse
+			} catch (e) {
+				console.error(e)
+				return null
+			}
+		}
+
+		const fetchData = async () => {
+			const apiUrlResponse = await fetch(`/api_url.txt`) 
+			apiUrl = await apiUrlResponse.text()
+			
+			const [ user ] = await Promise.all([
+				fetchUser()
+			])
+
+			if (user) {
+				document.querySelector('#user-name').innerHTML = user.name
+			}
+		}
+
+		if (!apiKey) {
+			window.location = "/login.html"
+		} else {  
+			fetchData()
 		}
 	</script>
 </body>
