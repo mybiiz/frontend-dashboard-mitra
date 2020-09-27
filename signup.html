@@ -33,38 +33,38 @@
 					<div class="row">
 						<div class="col-lg-6 p-t-20">
 							<div class="wrap-input100 validate-input" data-validate="Enter nomor handphone">
-								<input class="input100" type="text" name="Nomor HandPhone" placeholder="Nomor HandPhone">
+								<input id="phone-input" class="input100" type="text" name="Nomor HandPhone" placeholder="Nomor HandPhone">
 								<span class="focus-input100" data-placeholder="&#xf207;"></span>
 							</div>
 						</div>
 						<div class="col-lg-6 p-t-20">
 							<div class="wrap-input100 validate-input" data-validate="Enter email">
-								<input class="input100" type="email" name="email" placeholder="Email">
+								<input  id="email-input" class="input100" type="email" name="email" placeholder="Email">
 								<span class="focus-input100" data-placeholder="&#xf207;"></span>
 							</div>
 						</div>
 						<div class="col-lg-6 p-t-20">
 							<div class="wrap-input100 validate-input" data-validate="Enter password">
-								<input class="input100" type="password" name="pass" placeholder="Password">
+								<input id="password-input" class="input100" type="password" name="pass" placeholder="Password">
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div>
 						</div>
 						<div class="col-lg-6 p-t-20">
 							<div class="wrap-input100 validate-input" data-validate="Enter password again">
-								<input class="input100" type="password" name="pass2" placeholder="Confirm password">
+								<input id="password-confirm-input" class="input100" type="password" name="pass2" placeholder="Confirm password">
 								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div>
 						</div>
 					</div>
-					<div class="contact100-form-checkbox">
+					<!-- <div class="contact100-form-checkbox">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						<label class="label-checkbox100" for="ckb1">
 							Remember me
 						</label>
-					</div>
+					</div> -->
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Sign In
+						<button type="submit" id="signup-btn" class="login100-form-btn">
+							Sign Up
 						</button>
 					</div>
 					<div class="text-center p-t-60">
@@ -82,6 +82,95 @@
 	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/pages/extra_pages/login.js"></script>
 	<!-- end js include path -->
+	<script>
+		const emailRegex = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+
+		let initialUser = {
+			user: {
+				email: "",
+				password: "",
+				serviceType: null
+			},
+			partner: { 
+				phone: ""
+			}
+		}
+
+		let passwordConfirm = ""
+
+
+		document.querySelector('#phone-input').addEventListener('input', e => {
+			initialUser = { 
+				...initialUser,
+				partner: {
+					...initialUser.partner,
+					phone: e.target.value
+				}
+			}	
+		})
+
+		document.querySelector('#email-input').addEventListener('input', e => {
+			initialUser = { 
+				...initialUser,
+				user: {
+					...initialUser.user,
+					email: e.target.value
+				}
+			}	
+		})
+
+		document.querySelector('#password-input').addEventListener('input', e => {
+			initialUser = { 
+				...initialUser,
+				user: {
+					...initialUser.user,
+					password: e.target.value
+				}
+			}	
+		})
+
+		document.querySelector('#password-confirm-input').addEventListener('input', e => {
+			passwordConfirm = e.target.value
+		})
+
+		document.querySelector('#signup-btn').addEventListener('click', async e => {
+			e.preventDefault()
+
+			if (initialUser.partner.phone === "") {
+				alert('Harap isi nomor telepon.')
+			} else if (initialUser.user.email === "") {
+				alert('Harap isi email.')
+			} else if (!initialUser.user.email.match(emailRegex)) {
+				alert('Harap input email yg valid.')
+			} else if (initialUser.user.password === "") {
+				alert('Harap isi password.')
+			} else if (initialUser.user.password !== passwordConfirm) {
+				alert('Password tidak match.')
+			} else {
+				const apiUrlResponse = await fetch(`/api_url.txt`)
+				const apiUrl = await apiUrlResponse.text()
+
+				try {
+					const response = await fetch(`${apiUrl}/register`, {
+						method: 'post',
+						headers: {
+							'content-type': 'application/json'
+						},
+						body: JSON.stringify(initialUser)
+					})
+
+					if (response.status === 500) throw await response.text()
+
+					alert('Sign-up sukses!')
+					window.location = '/login.html'	
+				} catch (e) {
+					console.log(e)
+					alert(e)
+				}
+			}
+		})
+		
+	</script>
 </body>
 
 </html>
