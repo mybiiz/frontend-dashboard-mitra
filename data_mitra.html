@@ -88,7 +88,7 @@
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
 								data-close-others="true">
 								<img alt="" class="img-circle " src="../../" /> <!--foto user-->
-								<span class="username username-hide-on-mobile"> {{Username}} </span>
+								<span id="username-div" class="username username-hide-on-mobile"></span>
 								<i class="fa fa-angle-down"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-default animated jello">
@@ -135,178 +135,194 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="card-box">
-								<div class="card-head">
-									<header>Data Mitra</header>
-									</ul>
-								</div>
-								<div class="card-body row">
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtNIK">
-											<label class="mdl-textfield__label">NIK</label>
-										</div>
+							<form>
+								<div class="card-box">
+									<div class="card-head">
+										<header>Data Mitra</header>
+										</ul>
 									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtFirstName">
-											<label class="mdl-textfield__label">Nama Depan</label>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtLasttName">
-											<label class="mdl-textfield__label">Nama Belakang</label>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtJabatan">
-											<label class="mdl-textfield__label">Jabatan</label>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="sample2" value=""
-												readonly tabIndex="-1">
-											<label for="sample2" class="pull-right margin-0">
-												<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-											</label>
-											<label for="sample2" class="mdl-textfield__label">Jenis Kelamin</label>
-											<ul data-mdl-for="sample2"
-												class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-												<li class="mdl-menu__item" data-val="DE">Pria</li>
-												<li class="mdl-menu__item" data-val="BY">Wanita</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text"
-												pattern="-?[0-9]*(\.[0-9]+)?" id="text5">
-											<label class="mdl-textfield__label" for="text5">Nomor Handphone</label>
-											<span class="mdl-textfield__error">Nomor harus dimasukan!</span>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="email" id="txtemail">
-											<label class="mdl-textfield__label">Email</label>
-											<span class="mdl-textfield__error">Masukan Email dengan benar!</span>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtdomisili">
-											<label class="mdl-textfield__label">Alamat Domisili</label>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtusaha">
-											<label class="mdl-textfield__label">Nama Usaha</label>
-											<span class="mdl-textfield__error">Wajib!</span>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtalamatusaha">
-											<label class="mdl-textfield__label">Alamat Usaha</label>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="list3" value="" readonly
-												tabIndex="-1">
-											<label for="list3" class="pull-right margin-0">
-												<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-											</label>
-											<label for="list3" class="mdl-textfield__label">Bidang Usaha</label>
-											<ul data-mdl-for="list3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-												<li class="mdl-menu__item" data-val="1">Hotel</li>
-												<li class="mdl-menu__item" data-val="2">Apartemen</li>
-												<li class="mdl-menu__item" data-val="3">Kost</li>
-												<li class="mdl-menu__item" data-val="4">Laundry</li>
-												<li class="mdl-menu__item" data-val="5">Rental Mobil</li>
-											</ul>
-										</div>
-									</div>
-
-									<div class="col-lg-12 p-t-20">
-										<label class="control-label col-md-3">Upload Foto KTP dan Selfie+KTP</label>
-										<form id="id_dropzone" class="dropzone">
-											<div class="dz-message">
-												<div class="dropIcon">
-													<i class="material-icons">cloud_upload</i>
+									<form>
+										<div class="card-body row">
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="txtNIK">
+													<label class="mdl-textfield__label">NIK</label>
 												</div>
-												<h3>Seret gambar ke sini atau klik untuk mengunggah.</h3>
 											</div>
-										</form>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="txtFirstName">
+													<label class="mdl-textfield__label">Nama Depan</label>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="txtLasttName">
+													<label class="mdl-textfield__label">Nama Belakang</label>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="txtJabatan">
+													<label class="mdl-textfield__label">Jabatan</label>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="sample2" value=""
+														readonly tabIndex="-1">
+													<label for="sample2" class="pull-right margin-0">
+														<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+													</label>
+													<label for="sample2" class="mdl-textfield__label">Jenis Kelamin</label>
+													<ul data-mdl-for="sample2"
+														class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+														<li class="mdl-menu__item" data-val="DE">Pria</li>
+														<li class="mdl-menu__item" data-val="BY">Wanita</li>
+													</ul>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text"
+														pattern="-?[0-9]*(\.[0-9]+)?" id="text5">
+													<label class="mdl-textfield__label" for="text5">Nomor Handphone</label>
+													<span class="mdl-textfield__error">Nomor harus dimasukan!</span>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="email" id="txtemail">
+													<label class="mdl-textfield__label">Email</label>
+													<span class="mdl-textfield__error">Masukan Email dengan benar!</span>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="txtdomisili">
+													<label class="mdl-textfield__label">Alamat Domisili</label>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="txtusaha">
+													<label class="mdl-textfield__label">Nama Usaha</label>
+													<span class="mdl-textfield__error">Wajib!</span>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="txtalamatusaha">
+													<label class="mdl-textfield__label">Alamat Usaha</label>
+												</div>
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<div
+													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+													<input class="mdl-textfield__input" type="text" id="list3" value="" readonly
+														tabIndex="-1">
+													<label for="list3" class="pull-right margin-0">
+														<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+													</label>
+													<label for="list3" class="mdl-textfield__label">Bidang Usaha</label>
+													<ul data-mdl-for="list3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+														<li class="mdl-menu__item" data-val="1">Hotel</li>
+														<li class="mdl-menu__item" data-val="2">Apartemen</li>
+														<li class="mdl-menu__item" data-val="3">Kost</li>
+														<li class="mdl-menu__item" data-val="4">Laundry</li>
+														<li class="mdl-menu__item" data-val="5">Rental Mobil</li>
+													</ul>
+												</div>
+											</div>
+											
+											<div class="col-lg-12 p-t-20">
+												<div class="mdl-textfield mdl-js-textfield txt-full-width">
+													<textarea class="mdl-textfield__input" rows="4" id="txtbusinessdesc"></textarea>
+													<label class="mdl-textfield__label" for="text7">Deskripsi Perusahaan</label>
+												</div>
+											</div>
+											<!-- <div class="col-lg-12 p-t-20 text-center">
+												<button type="submit"
+													id="datamitra-submit"
+													class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Submit</button>
+												<button type="button"
+													class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
+											</div> -->
+										</div>
+									</form>
+									<div class="row">
+										<div class="col-sm-12"> 
+											<div class="col-lg-12 p-t-20">
+												<label class="control-label col-md-3">Upload Foto KTP dan Selfie+KTP</label>
+												<form id="id_dropzone" class="dropzone">
+													<div class="dz-message">
+														<div class="dropIcon">
+															<i class="material-icons">cloud_upload</i>
+														</div>
+														<h3>Seret gambar ke sini atau klik untuk mengunggah.</h3>
+													</div>
+												</form>
+											</div>
+										</div>
 									</div>
-									<div class="col-lg-12 p-t-20">
-										<div class="mdl-textfield mdl-js-textfield txt-full-width">
-											<textarea class="mdl-textfield__input" rows="4" id="education"></textarea>
-											<label class="mdl-textfield__label" for="text7">Deskripsi Perusahaan</label>
+									<div class="row">
+										<div class="col-sm-12">
+											<!-- <div class="card-box"> -->
+												<div class="card-head">
+													<header>Data Rekening Bank</header>
+													</ul>
+												</div>
+												<div class="card-body row">
+													<div class="col-lg-6 p-t-20">
+														<div
+															class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+															<input class="mdl-textfield__input" type="text" id="txtBank">
+															<label class="mdl-textfield__label">Bank</label>
+														</div>
+													</div>
+													<div class="col-lg-6 p-t-20">
+														<div
+															class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+															<input class="mdl-textfield__input" type="text" id="txtNoRek">
+															<label class="mdl-textfield__label">Nomor Rekening</label>
+														</div>
+													</div>
+													<div class="col-lg-6 p-t-20">
+														<div
+															class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+															<input class="mdl-textfield__input" type="text" id="txtAtasNama">
+															<label class="mdl-textfield__label">Atas Nama</label>
+														</div>
+													</div>
+													<!-- <div class="col-lg-12 p-t-20 text-center">
+														<button type="button"
+															class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Submit</button>
+														<button type="button"
+															class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
+													</div> -->
+												</div>
+											<!-- </div> -->
 										</div>
 									</div>
 									<div class="col-lg-12 p-t-20 text-center">
-										<button type="button"
+										<button type="submit"
+											id="datamitra-submit"
 											class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Submit</button>
 										<button type="button"
 											class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="card-box">
-											<div class="card-head">
-												<header>Data Rekening Bank</header>
-												</ul>
-											</div>
-											<div class="card-body row">
-												<div class="col-lg-6 p-t-20">
-													<div
-														class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-														<input class="mdl-textfield__input" type="text" id="txtBank">
-														<label class="mdl-textfield__label">Bank</label>
-													</div>
-												</div>
-												<div class="col-lg-6 p-t-20">
-													<div
-														class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-														<input class="mdl-textfield__input" type="text" id="txtNoRek">
-														<label class="mdl-textfield__label">Nomor Rekening</label>
-													</div>
-												</div>
-												<div class="col-lg-6 p-t-20">
-													<div
-														class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-														<input class="mdl-textfield__input" type="text" id="txtAtasNama">
-														<label class="mdl-textfield__label">Atas Nama</label>
-													</div>
-												</div>
-												<div class="col-lg-12 p-t-20 text-center">
-													<button type="button"
-														class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Submit</button>
-													<button type="button"
-														class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -347,11 +363,77 @@
 	<script src="assets/js/pages/datetime/datetime-data.js"></script>
 	<!-- animation -->
 	<script src="assets/js/pages/ui/animations.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<!-- end js include path -->
 	<script>
 		document.querySelector('#logout-btn').addEventListener('click', e => {
 			localStorage.removeItem("apiKey")
 			window.location = '/'
+		})
+
+		document.querySelector('#username-div').innerHTML = `
+			<div class="spinner-border spinner-border-sm" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		`
+
+		const fetchUser = async () => {
+			try {
+				const apiUrlResponse = await fetch(`/api_url.txt`)
+				const apiUrl = await apiUrlResponse.text()
+				const apiKey = localStorage.getItem('apiKey')
+				const id = jwt_decode(apiKey).id
+ 				const userInfoResponse = await fetch(`${apiUrl}/users/${id}`, {
+					headers: { 
+						authorization: apiKey,
+					}
+				})
+				if (userInfoResponse.status !== 200) throw await response.text()
+				const userInfo = await userInfoResponse.json()
+				console.log(userInfo)
+
+				document.querySelector('#username-div').innerText = userInfo.name
+			} catch (e) {
+				console.error(e);
+				document.querySelector('#username-div').innerHTML = ``
+			}
+		}
+
+		fetchUser()
+		
+		document.querySelector('#datamitra-submit').addEventListener('click', async e => {
+			e.preventDefault()
+			const nik = document.querySelector('#txtNIK').value
+			const firstName = document.querySelector('#txtFirstName').value
+			const lastName = document.querySelector('#txtLasttName').value
+			const jabatan = document.querySelector('#txtJabatan').value
+			const phone = document.querySelector('#text5').value
+			const email = document.querySelector('#txtemail').value
+			const domisili = document.querySelector('#txtdomisili').value
+			const usaha = document.querySelector('#txtdomisili').value
+			const alamatUsaha = document.querySelector('#txtalamatusaha').value
+			const businessDesc = document.querySelector('#txtbusinessdesc').value
+			const bank = document.querySelector('#txtBank').value
+			const noRek = document.querySelector('#txtNoRek').value
+			const atasNama = document.querySelector('#txtAtasNama').value
+
+			const partnerData = {
+				nik: nik,
+				firstName: firstName,
+				lastName: lastName,
+				jabatan: jabatan,
+				phone: phone,
+				email: email,
+				domisili: domisili,
+				usaha: usaha,
+				alamatUsaha: alamatUsaha,
+				businessDesc: businessDesc,
+				bank: bank,
+				noRek: noRek,
+				atasNama: atasNama
+			}
+
+			console.log(partnerData)
 		})
 	</script>
 </body>
