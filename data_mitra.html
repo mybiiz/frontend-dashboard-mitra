@@ -175,6 +175,7 @@
 												<div
 													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
 													<input class="mdl-textfield__input" type="text" id="sample2" value=""
+														onchange="handleChooseSex(event)"
 														readonly tabIndex="-1">
 													<label for="sample2" class="pull-right margin-0">
 														<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
@@ -229,18 +230,19 @@
 											<div class="col-lg-6 p-t-20">
 												<div
 													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-													<input class="mdl-textfield__input" type="text" id="list3" value="" readonly
+													<input class="mdl-textfield__input" type="text" id="bidang-usaha-dropdown" readonly
 														tabIndex="-1">
-													<label for="list3" class="pull-right margin-0">
+													<label for="bidang-usaha-dropdown" class="pull-right margin-0">
 														<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
 													</label>
-													<label for="list3" class="mdl-textfield__label">Bidang Usaha</label>
-													<ul data-mdl-for="list3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-														<li class="mdl-menu__item" data-val="1">Hotel</li>
+													<label for="bidang-usaha-dropdown" class="mdl-textfield__label">Bidang Usaha</label>
+													<ul id="service-type-list" data-mdl-for="bidang-usaha-dropdown" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+														<!-- <li class="mdl-menu__item" data-val="1">Hotel</li>
 														<li class="mdl-menu__item" data-val="2">Apartemen</li>
 														<li class="mdl-menu__item" data-val="3">Kost</li>
 														<li class="mdl-menu__item" data-val="4">Laundry</li>
-														<li class="mdl-menu__item" data-val="5">Rental Mobil</li>
+														<li class="mdl-menu__item" data-val="5">Rental Mobil</li> -->
+														
 													</ul>
 												</div>
 											</div>
@@ -264,17 +266,46 @@
 										<div class="col-sm-12"> 
 											<div class="col-lg-12 p-t-20">
 												<label class="control-label col-md-3">Upload Foto KTP dan Selfie+KTP</label>
-												<form id="id_dropzone" class="dropzone">
+												<!-- <form id="id_dropzone" class="dropzone">
 													<div class="dz-message">
 														<div class="dropIcon">
 															<i class="material-icons">cloud_upload</i>
 														</div>
 														<h3>Seret gambar ke sini atau klik untuk mengunggah.</h3>
 													</div>
-												</form>
+												</form> -->
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-lg-6 p-t-20">
+												<div>
+													<input id="ktp-upload-btn" type="file" />
+												</div>
+												<div class="border border-dark py-3 px-5" id="drop_zone" ondrop="dropHandler(event)" ondragleave="dragLeaveHandler(event)" ondragover="dragOverHandler(event)">
+													<div>
+														Seret gambar ke sini atau klik untuk mengunggah...
+													</div>
+												</div>	
+											</div>
+											<div class="col-lg-6 p-t-20">
+												<button id="clear-img-btn" class="btn btn-secondary">Clear</button>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-lg-6 p-t-20">
+												<img id="ktp-img" style="width:100%" />
+											</div>
+										</div>
+									</div>
+									<!-- <div class="row">
+										<form class="dropzone" action="" method="post" enctype="multipart/form-data">
+											<input type="file" name="file" />
+										</form>
+									</div> -->
 									<div class="row">
 										<div class="col-sm-12">
 											<!-- <div class="card-box"> -->
@@ -315,9 +346,13 @@
 										</div>
 									</div>
 									<div class="col-lg-12 p-t-20 text-center">
-										<button type="submit"
+										<button 
+											type="submit"
 											id="datamitra-submit"
-											class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Submit</button>
+											class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink"
+										>
+											Submit
+										</button>
 										<button type="button"
 											class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
 									</div>
@@ -366,6 +401,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<!-- end js include path -->
 	<script>
+		let megabytesLimit = 2 * 1024 * 1024
+		let ktpImageBas64 = ''
+		let userInfo = null
+		let serviceTypes = []
+		let serviceTypeId = 0
+		let sex = null
+
+		document.addEventListener('drop', e => {
+			e.preventDefault()
+		})
+
 		document.querySelector('#logout-btn').addEventListener('click', e => {
 			localStorage.removeItem("apiKey")
 			window.location = '/'
@@ -376,6 +422,42 @@
 				<span class="sr-only">Loading...</span>
 			</div>
 		`
+		
+		const checkAndAddFile = (file) => {
+			if (file.size > megabytesLimit) {
+				alert(`Ukuran file melebihi batas! Max: 2MB, file yg diupload: ${Math.round(file.size/1024/1024)}MB`)
+				document.querySelector('#drop_zone').style.backgroundColor = 'white'
+			} else {
+				const reader = new FileReader()
+				reader.readAsDataURL(file)
+				reader.onload = () => {
+					const ktpResult = reader.result
+					console.log(ktpResult)
+					ktpImageBas64 = ktpResult
+					document.querySelector('#drop_zone').style.backgroundColor = 'white'
+					document.querySelector('#ktp-img').src = ktpResult
+				}
+				reader.onerror = () => {
+					document.querySelector('#drop_zone').style.backgroundColor = 'white'
+				}
+			}
+		}
+
+		document.querySelector('#ktp-upload-btn').addEventListener('change', e => {
+			e.preventDefault()
+			checkAndAddFile(e.target.files[0])
+		})
+
+		document.querySelector('#clear-img-btn').addEventListener('click', e => {
+			e.preventDefault()
+			ktpImageBas64 = ''
+			document.querySelector('#ktp-img').src = ''
+		})
+
+		const handleChooseSex = e => {
+			console.log('chosen:', e.target.value)
+			sex = e.target.value
+		}
 
 		const fetchUser = async () => {
 			try {
@@ -387,9 +469,9 @@
 					headers: { 
 						authorization: apiKey,
 					}
-				})
+				}) 
 				if (userInfoResponse.status !== 200) throw await response.text()
-				const userInfo = await userInfoResponse.json()
+				userInfo = await userInfoResponse.json()
 				console.log(userInfo)
 
 				document.querySelector('#username-div').innerText = userInfo.name
@@ -399,10 +481,44 @@
 			}
 		}
 
+		const fetchServiceTypes= async () => {
+			try {
+				const apiUrlResponse = await fetch(`/api_url.txt`)
+				const apiUrl = await apiUrlResponse.text()
+				const apiKey = localStorage.getItem('apiKey')
+				const id = jwt_decode(apiKey).id
+ 				const serviceTypesResponse = await fetch(`${apiUrl}/servicetypes`, {
+					headers: { 
+						authorization: apiKey,
+					}
+				}) 
+				if (serviceTypesResponse.status !== 200) throw await response.text()
+				serviceTypes = await serviceTypesResponse.json()
+				console.log('service types:', serviceTypes)
+
+				const serviceTypesMapped = serviceTypes.map(serviceType => `
+						<li onclick="selectServiceType(${serviceType.id})" class="mdl-menu__item" data-val="${serviceType.id}">${serviceType.name}</li>
+				`).join('')
+
+				document.querySelector(`#service-type-list`).innerHTML = serviceTypesMapped
+			} catch (e) {
+				console.error(e)
+			}
+		}
+
+		const selectServiceType = (id) => {
+			const foundServiceType = serviceTypes.find(serviceType => serviceType.id === id)
+			serviceTypeId = id
+			console.log('selected:', id, foundServiceType)
+			document.querySelector('#bidang-usaha-dropdown').value = foundServiceType.name
+		}
+
 		fetchUser()
+		fetchServiceTypes()
 		
 		document.querySelector('#datamitra-submit').addEventListener('click', async e => {
 			e.preventDefault()
+			
 			const nik = document.querySelector('#txtNIK').value
 			const firstName = document.querySelector('#txtFirstName').value
 			const lastName = document.querySelector('#txtLasttName').value
@@ -410,31 +526,117 @@
 			const phone = document.querySelector('#text5').value
 			const email = document.querySelector('#txtemail').value
 			const domisili = document.querySelector('#txtdomisili').value
-			const usaha = document.querySelector('#txtdomisili').value
+			const usaha = document.querySelector('#txtusaha').value
 			const alamatUsaha = document.querySelector('#txtalamatusaha').value
 			const businessDesc = document.querySelector('#txtbusinessdesc').value
 			const bank = document.querySelector('#txtBank').value
 			const noRek = document.querySelector('#txtNoRek').value
 			const atasNama = document.querySelector('#txtAtasNama').value
+			// const dropzoneId = document.querySelector('#id_dropzone').innerHTML
 
-			const partnerData = {
-				nik: nik,
-				firstName: firstName,
-				lastName: lastName,
-				jabatan: jabatan,
-				phone: phone,
-				email: email,
-				domisili: domisili,
-				usaha: usaha,
-				alamatUsaha: alamatUsaha,
-				businessDesc: businessDesc,
-				bank: bank,
-				noRek: noRek,
-				atasNama: atasNama
+			// Validation
+			if (nik === '')
+				alert('Harap isi NIK dengan benar!')
+			else if (firstName === '')
+				alert('Harap isi nama depan dengan benar!')
+			else if (lastName === '')
+				alert('Harap isi nama belakang dengan benar!')
+			else if (jabatan === '')
+				alert('Harap isi jabatan dengan benar!')
+			else if (phone === '')
+				alert('Harap isi nomor telepon dengan benar!')
+			else if (domisili === '')
+				alert('Harap isi domisili dengan benar!')
+			else if (usaha === '')
+				alert('Harap isi nama usaha dengan benar!')
+			else if (alamatUsaha === '')
+				alert('Harap isi alamat usaha dengan benar!')
+			else if (businessDesc === '')
+				alert('Harap isi deskripsi bisnis dengan benar!')
+			else if (bank === '')
+				alert('Harap isi bank dengan benar!')
+			else if (noRek === '')
+				alert('Harap isi nomor rekening dengan benar!')
+			else if (atasNama === '')
+				alert('Harap isi atas nama dengan benar!')
+			else if (serviceTypeId === 0)
+				alert('Harap isi bidang bisnis dengan benar!')
+			else if (ktpImageBas64 === '')
+				alert('Harap upload KTP yang valid!')
+			else if (sex === null)
+				alert('Harap isi jenis kelamin dengan benar!')
+			else {
+				const partnerData = {
+					partner: {
+						familyIdNumber: nik,
+						firstName: firstName,
+						lastName: lastName,
+						name: usaha,
+						phone: phone,
+						alamatUsaha: alamatUsaha,
+						business: {
+							name: usaha,
+							address: alamatUsaha,
+							description: businessDesc,
+							serviceType: null,
+							serviceTypeId: serviceTypeId,
+						},
+						businessId: 0,
+						city: domisili,
+						position: jabatan,
+						sex: sex,
+						bankName: bank,
+						bank: null,
+						bankId: 0,
+						bankAccountId: noRek,
+						bankHolderName: atasNama,
+						email: email,
+						// domisili: domisili,
+						// serviceType: null,
+						// serviceTypeId: 0,
+						lat: 0,
+						lon: 0,
+						user: null,
+						userId: userInfo.id,
+					},
+					citizenIdPhoto: ktpImageBas64 
+				}
+
+				try {
+					const apiUrlResponse = await fetch(`/api_url.txt`)
+					const apiUrl = await apiUrlResponse.text()
+					const response = await fetch(`${apiUrl}/partnersregister`, {
+						method: 'post',
+						headers: { authorization: localStorage.getItem('apiKey') },
+						body: JSON.stringify(partnerData)
+					})
+					if (response.status !== 200) throw await response.text()
+					window.location = '/'
+				} catch (e) {
+					console.error(e)
+				}
+
+				console.log(partnerData)
 			}
-
-			console.log(partnerData)
 		})
+
+		const dropHandler = e => {
+			e.preventDefault()
+			checkAndAddFile(e.dataTransfer.files[0])
+		}
+
+		const dragLeaveHandler = e => {
+			e.preventDefault()
+			const myDropzone = document.querySelector('#drop_zone').style.backgroundColor = 'white'
+		}
+
+		const dragOverHandler = e => {
+			e.preventDefault()
+		
+			const myDropzone = document.querySelector('#drop_zone')
+			console.log('Dragging over', myDropzone)
+			myDropzone.style.backgroundColor = 'lightgray'
+		}
 	</script>
 </body>
 

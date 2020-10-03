@@ -106,7 +106,7 @@
 
 		const fetchUser = async () => {
 			try {
-				const response = await fetch(`${apiUrl}/users/${jwtDecode(apiKey)?.id}`)
+				const response = await fetch(`${apiUrl}/users/${jwt_decode(apiKey)?.id}`)
 				const userResponse = await response.json()
 				
 				return userResponse
@@ -125,7 +125,8 @@
 			])
 
 			if (user && user.registrationCompleted) {
-				document.querySelector('#user-name').innerHTML = user.name
+				// document.querySelector('#user-name').innerHTML = user.name
+				console.log('Registration complete!')
 			} else {
 				window.location = '/data_mitra.html'
 			}
@@ -136,11 +137,11 @@
 		} else {  
 			fetchData()
 		
-			document.querySelector('#logout-btn').addEventListener('click', e => {
-				e.preventDefault()
-				localStorage.removeItem('apiKey')
-				window.location = '/login.html'
-			})
+			// document.querySelector('#logout-btn').addEventListener('click', e => {
+			// 	e.preventDefault()
+			// 	localStorage.removeItem('apiKey')
+			// 	window.location = '/login.html'
+			// })
 		}
 	</script>
 </body>
