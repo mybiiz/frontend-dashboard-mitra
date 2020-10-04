@@ -228,22 +228,26 @@
 												</div>
 											</div>
 											<div class="col-lg-6 p-t-20">
-												<div
+												<!-- <div
 													class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-													<input class="mdl-textfield__input" type="text" id="bidang-usaha-dropdown" readonly
+													<input class="mdl-textfield__input" id="bidang-usaha-dropdown" readonly
 														tabIndex="-1">
 													<label for="bidang-usaha-dropdown" class="pull-right margin-0">
 														<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
 													</label>
 													<label for="bidang-usaha-dropdown" class="mdl-textfield__label">Bidang Usaha</label>
 													<ul id="service-type-list" data-mdl-for="bidang-usaha-dropdown" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-														<!-- <li class="mdl-menu__item" data-val="1">Hotel</li>
-														<li class="mdl-menu__item" data-val="2">Apartemen</li>
-														<li class="mdl-menu__item" data-val="3">Kost</li>
-														<li class="mdl-menu__item" data-val="4">Laundry</li>
-														<li class="mdl-menu__item" data-val="5">Rental Mobil</li> -->
-														
 													</ul>
+												</div> -->
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+													<select class="mdl-textfield__input" id="bidang-usaha-dropdown" name="bidang-usaha">
+														<!-- <option value="85">85</option>
+														<option value="87">87</option>
+														<option value="89">89</option>
+														<option value="91">91</option>
+														<option value="diesel">Diesel</option> -->
+													</select>
+													<label class="mdl-textfield__label" for="octane">Bidang Usaha</label>
 												</div>
 											</div>
 											
@@ -283,7 +287,7 @@
 												<div>
 													<input id="ktp-upload-btn" type="file" />
 												</div>
-												<div class="border border-dark py-3 px-5" id="drop_zone" ondrop="dropHandler(event)" ondragleave="dragLeaveHandler(event)" ondragover="dragOverHandler(event)">
+												<div class="py-3 px-5" id="drop_zone" ondrop="dropHandler(event)" ondragleave="dragLeaveHandler(event)" ondragover="dragOverHandler(event)">
 													<div>
 														Seret gambar ke sini atau klik untuk mengunggah...
 													</div>
@@ -497,10 +501,12 @@
 				console.log('service types:', serviceTypes)
 
 				const serviceTypesMapped = serviceTypes.map(serviceType => `
-						<li onclick="selectServiceType(${serviceType.id})" class="mdl-menu__item" data-val="${serviceType.id}">${serviceType.name}</li>
+					<option onclick="selectServiceType(${serviceType.id})" value="${serviceType.name}">${serviceType.name}</option>					
 				`).join('')
 
-				document.querySelector(`#service-type-list`).innerHTML = serviceTypesMapped
+				// <li onclick="selectServiceType(${serviceType.id})" class="mdl-menu__item" data-val="${serviceType.id}">${serviceType.name}</li>
+
+				document.querySelector(`#bidang-usaha-dropdown`).innerHTML = serviceTypesMapped
 			} catch (e) {
 				console.error(e)
 			}
@@ -510,7 +516,7 @@
 			const foundServiceType = serviceTypes.find(serviceType => serviceType.id === id)
 			serviceTypeId = id
 			console.log('selected:', id, foundServiceType)
-			document.querySelector('#bidang-usaha-dropdown').value = foundServiceType.name
+			// document.querySelector('#bidang-usaha-dropdown').value = foundServiceType.name
 		}
 
 		fetchUser()
@@ -535,8 +541,8 @@
 			// const dropzoneId = document.querySelector('#id_dropzone').innerHTML
 
 			// Validation
-			if (nik === '')
-				alert('Harap isi NIK dengan benar!')
+			if (nik === '' || nik.length !== 16)
+				alert('Harap isi NIK dengan benar! Panjang NIK harus 16 digit.')
 			else if (firstName === '')
 				alert('Harap isi nama depan dengan benar!')
 			else if (lastName === '')
