@@ -106,7 +106,7 @@
 
 		const fetchUser = async () => {
 			try {
-				const response = await fetch(`${apiUrl}/users/${jwt_decode(apiKey)?.id}`)
+				const response = await fetch(`${apiUrl}/users/${jwt_decode(apiKey)?.id}/view`)
 				const userResponse = await response.json()
 				
 				return userResponse
@@ -127,6 +127,35 @@
 			if (user && user.registrationCompleted) {
 				// document.querySelector('#user-name').innerHTML = user.name
 				console.log('Registration complete!')
+
+				// Redirect to dashboards
+				if (user.partners && user.partners?.length > 0 && user.partners[0]?.business?.serviceType != null) {
+					const serviceType = user.partners[0].business.serviceType
+
+					console.log('Service type:', serviceType )
+
+					switch (serviceType.name) {
+						case 'Hotel':
+							window.location = '/dashboard_room.html'
+							break
+							
+						case 'Apartemen':
+							window.location = '/dashboard_room.html'
+							break
+							
+						case 'Kost':
+							window.location = '/dashboard_room.html'
+							break
+
+						case 'Laundry':
+							window.location = '/dashboard_laundry.html'
+							break
+
+						case 'Rental Mobil':
+							window.location = '/dashboard_mobil.html'
+							break
+					}
+				}
 			} else {
 				window.location = '/data_mitra.html'
 			}
