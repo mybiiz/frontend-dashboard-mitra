@@ -411,6 +411,7 @@
 		let serviceTypes = []
 		let serviceTypeId = 0
 		let sex = null
+		let serviceTypeDropdown = document.querySelector(`#bidang-usaha-dropdown`);
 
 		document.addEventListener('drop', e => {
 			e.preventDefault()
@@ -505,19 +506,17 @@
 				`).join('')
 
 				// <li onclick="selectServiceType(${serviceType.id})" class="mdl-menu__item" data-val="${serviceType.id}">${serviceType.name}</li>
-
-				document.querySelector(`#bidang-usaha-dropdown`).innerHTML = serviceTypesMapped
+				
+				serviceTypeDropdown.innerHTML = '<option onclick="selectServiceType(0)" value=""></option>' + serviceTypesMapped;
 			} catch (e) {
 				console.error(e)
 			}
 		}
 
-		const selectServiceType = (id) => {
-			const foundServiceType = serviceTypes.find(serviceType => serviceType.id === id)
-			serviceTypeId = id
-			console.log('selected:', id, foundServiceType)
-			// document.querySelector('#bidang-usaha-dropdown').value = foundServiceType.name
-		}
+		// When Select is on change, it set serviceTypeId to selectedIndex
+		serviceTypeDropdown.addEventListener('change', (e) => {
+			serviceTypeId = e.target.selectedIndex;
+		})
 
 		fetchUser()
 		fetchServiceTypes()
