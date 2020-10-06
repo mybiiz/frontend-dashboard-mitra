@@ -134,8 +134,8 @@
 												<img src="../.." class="img-responsive" alt=""> </div> <!--foto mitra-->
 										</div>
 										<div class="profile-usertitle">
-											<div class="profile-usertitle-name"> {{nama mitra}}</div>
-											<div class="profile-usertitle-job"> {{nama usaha}} </div>
+											<div class="profile-usertitle-name" id="name"> {{nama mitra}}</div>
+											<div class="profile-usertitle-job" id="businessName"> {{nama usaha}} </div>
 										</div>
 										<!-- END SIDEBAR USER TITLE -->
 									</div>
@@ -148,15 +148,15 @@
 										<ul class="list-group list-group-unbordered">
 											<li class="list-group-item">
 												<b>Jenis Kelamin</b>
-												<div class="profile-desc-item pull-right">{{jenis kelamin}}</div>
+												<div class="profile-desc-item pull-right" id="sex">{{jenis kelamin}}</div>
 											</li>
 											<li class="list-group-item">
 												<b>Jabatan</b>
-												<div class="profile-desc-item pull-right">{{Jabatan}}</div>
+												<div class="profile-desc-item pull-right" id="position">{{Jabatan}}</div>
 											</li>
 											<li class="list-group-item">
 												<b>Alamat</b>
-												<div class="profile-desc-item pull-right">{{Alamat Mitra}}</div>
+												<div class="profile-desc-item pull-right" id="partnerAddress">{{Alamat Mitra}}</div>
 											</li>
 										</ul>
 										</div>
@@ -169,7 +169,7 @@
 									<div class="card-body no-padding height-9">
 										<div class="row text-center m-t-10">
 											<div class="col-md-12">
-												<p>{{alamat.usaha}}
+												<p id="businessAddress">{{alamat.usaha}}
 												</p>
 											</div>
 										</div>
@@ -183,15 +183,15 @@
 										<ul class="list-group list-group-unbordered">
 											<li class="list-group-item">
 												<b>Bank</b>
-												<div class="profile-desc-item pull-right">{{bank}}</div>
+												<div class="profile-desc-item pull-right" id="bankName">{{bank}}</div>
 											</li>
 											<li class="list-group-item">
 												<b>No Rekening</b>
-												<div class="profile-desc-item pull-right">{{no rek}}</div>
+												<div class="profile-desc-item pull-right" id="bankAccountId">{{no rek}}</div>
 											</li>
 											<li class="list-group-item">
 												<b>Atas Nama</b>
-												<div class="profile-desc-item pull-right">{{Atas Nama}}</div>
+												<div class="profile-desc-item pull-right" id="bankHolderName">{{Atas Nama}}</div>
 											</li>
 										</ul>
 										</div>
@@ -220,23 +220,23 @@
 													<div class="row">
 														<div class="col-md-3 col-6 b-r"> <strong>Nama Lengkap</strong>
 															<br>
-															<p class="text-muted">{{namauser}}</p>
+															<p class="text-muted" id="fullName">{{namauser}}</p>
 														</div>
 														<div class="col-md-3 col-6 b-r"> <strong>No. HP</strong>
 															<br>
-															<p class="text-muted">{{no hp user}}</p>
+															<p class="text-muted" id="phone">{{no hp user}}</p>
 														</div>
 														<div class="col-md-3 col-6 b-r"> <strong>Email</strong>
 															<br>
-															<p class="text-muted">{{email user}}</p>
+															<p class="text-muted" id="email">{{email user}}</p>
 														</div>
 														<div class="col-md-3 col-6"> <strong>Lokasi</strong>
 															<br>
-															<p class="text-muted">{{kota}}</p>
+															<p class="text-muted" id="city">{{kota}}</p>
 														</div>
 													</div>
 													<hr>
-													<p class="m-t-30">{{deskripsi usaha}}</p>
+													<p class="m-t-30" id="description">{{deskripsi usaha}}</p>
 												</div>
 											</div>
 											<div class="tab-pane" id="tab3">
@@ -309,7 +309,50 @@
 	<script src="assets/plugins/material/material.min.js"></script>
 	<!-- animation -->
 	<script src="assets/js/pages/ui/animations.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<!-- end js include path -->
+	<script>
+		const renderProfile = (data, selector) => {
+			var node = document.querySelector(selector);
+			if (!node) return;
+			node.innerHTML = data;
+		};
+
+		const fetchUser = async () => {
+			try {
+				const apiUrlResponse = await fetch(`/api_url.txt`)
+				const apiUrl = await apiUrlResponse.text()
+				const apiKey = localStorage.getItem('apiKey')
+				const id = jwt_decode(apiKey).id
+				const response = await fetch(`${apiUrl}/users/${id}/view`, {
+						method: 'get',
+						headers: { authorization: localStorage.getItem('apiKey') },
+					})
+				if (response.status !== 200) throw await response.text()
+					res = await response.json();
+					profile = res.partners[0];
+					console.log(profile)
+					// renderProfile(, '#username');
+					renderProfile(profile.firstName, '#name');
+					renderProfile(profile.business.name, '#businessName');
+					renderProfile(profile.business.address, '#businessAddress');
+					renderProfile(profile.sex, '#sex');
+					renderProfile(profile.position, '#position');
+					renderProfile(profile.address, '#partnerAddress');
+					renderProfile(profile.bankName, '#bankName');
+					renderProfile(profile.bankAccountId, '#bankAccountId');
+					renderProfile(profile.bankHolderName, '#bankHolderName');
+					renderProfile(`${profile.firstName} ${profile.lastName}`, '#fullName');
+					renderProfile(profile.phone, '#phone');
+					renderProfile(profile.city, '#city');
+					renderProfile(profile.business.description, '#description');
+				} catch (e) {
+					console.error(e)
+				}
+		}
+
+		fetchUser();
+	</script>
 </body>
 
 </html>
