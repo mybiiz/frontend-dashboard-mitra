@@ -655,7 +655,7 @@ body {
     display: block;
     width: 235px;
     height: 60px;
-    padding: 10px 20px 0px 30px;
+    padding: 5px 20px 0px 30px;
     background: #222c3c;
 }
 .logo-icon{
@@ -4533,8 +4533,6 @@ h4.media-heading {
 }
 .profile-sidebar {
     float: left;
-    width: 350px;
-    margin-right: 20px;
 }
 .profile-content {
     overflow: hidden;
@@ -4735,7 +4733,6 @@ h4.media-heading {
     text-align: left;
     font-size: 14px;
     color: #6f6d6d;
-    width: 100px;
 }
 .performance-list {
     list-style: none outside none;
@@ -7728,6 +7725,8 @@ nav-tabs>li {
     padding: 20px 5px;
     font-size: 13px;
     background-color: #222c3c;
+    bottom: 0;
+    width: 100%;
 }
 .page-footer:after,
 .page-footer:before {

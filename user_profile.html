@@ -84,7 +84,7 @@
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
 								data-close-others="true">
 								<img alt="" class="img-circle " src="../../" /> <!--foto user-->
-								<span class="username username-hide-on-mobile"> {{Username}} </span>
+								<span class="username username-hide-on-mobile" id="username"> {{Username}} </span>
 								<i class="fa fa-angle-down"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-default animated jello">
@@ -107,181 +107,185 @@
 		<!-- end header -->
 		<!-- start page container -->
 		<div class="page-container"></div>
-			<!-- start page content -->
-			<div class="page-content-wrapper">
-				<div class="page-content">
-					<div class="page-bar">
-						<div class="page-title-breadcrumb">
-							<div class=" pull-left">
-								<div class="page-title">Profil Mitra</div>
+		<!-- start page content -->
+		<div class="page-content-wrapper my-5">
+			<div class="page-content mx-auto container">
+				<div class="page-bar">
+					<div class="page-title-breadcrumb">
+						<div class=" pull-left">
+							<div class="page-title">Profil Mitra</div>
+						</div>
+						<ol class="breadcrumb page-breadcrumb pull-right">
+							<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item"
+									href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i> <!--tergantung user usaha nya apa, masuk ke index yang mana-->
+							</li>
+							<li class="active">Profil Mitra</li>
+						</ol>
+					</div>
+				</div>
+
+				<div class="row">
+					<!-- BEGIN PROFILE SIDEBAR -->
+					<div class="profile-sidebar col-lg-4 col-md-12 col-sm-12">
+						<div class="card card-topline-blue">
+							<div class="card-body no-padding height-9">
+								<div class="row">
+									<div class="profile-userpic">
+										<img src="../.." class="img-responsive" alt=""> </div> <!--foto mitra-->
+								</div>
+								<div class="profile-usertitle">
+									<div class="profile-usertitle-name" id="name"> {{nama mitra}}</div>
+									<div class="profile-usertitle-job" id="businessName"> {{nama usaha}} </div>
+								</div>
+								<!-- END SIDEBAR USER TITLE -->
 							</div>
-							<ol class="breadcrumb page-breadcrumb pull-right">
-								<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item"
-										href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i> <!--tergantung user usaha nya apa, masuk ke index yang mana-->
-								</li>
-								<li class="active">Profil Mitra</li>
-							</ol>
+						</div>
+						<div class="card">
+							<div class="card-head card-topline-blue">
+								<header>Tentang</header>
+							</div>
+							<div class="card-body no-padding height-9">
+								<ul class="list-group list-group-unbordered">
+									<li class="list-group-item">
+										<b>Jenis Kelamin</b>
+										<div class="profile-desc-item pull-right" id="sex">{{jenis kelamin}}</div>
+									</li>
+									<li class="list-group-item">
+										<b>Jabatan</b>
+										<div class="profile-desc-item pull-right" id="position">{{Jabatan}}</div>
+									</li>
+									<li class="list-group-item">
+										<b>Alamat</b>
+										<div class="profile-desc-item pull-right" id="partnerAddress">{{Alamat Mitra}}</div>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<!-- BEGIN PROFILE SIDEBAR -->
-							<div class="profile-sidebar">
-								<div class="card card-topline-aqua">
-									<div class="card-body no-padding height-9">
-										<div class="row">
-											<div class="profile-userpic">
-												<img src="../.." class="img-responsive" alt=""> </div> <!--foto mitra-->
-										</div>
-										<div class="profile-usertitle">
-											<div class="profile-usertitle-name" id="name"> {{nama mitra}}</div>
-											<div class="profile-usertitle-job" id="businessName"> {{nama usaha}} </div>
-										</div>
-										<!-- END SIDEBAR USER TITLE -->
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-head card-topline-aqua">
-										<header>Tentang</header>
-									</div>
-									<div class="card-body no-padding height-9">
-										<ul class="list-group list-group-unbordered">
-											<li class="list-group-item">
-												<b>Jenis Kelamin</b>
-												<div class="profile-desc-item pull-right" id="sex">{{jenis kelamin}}</div>
-											</li>
-											<li class="list-group-item">
-												<b>Jabatan</b>
-												<div class="profile-desc-item pull-right" id="position">{{Jabatan}}</div>
-											</li>
-											<li class="list-group-item">
-												<b>Alamat</b>
-												<div class="profile-desc-item pull-right" id="partnerAddress">{{Alamat Mitra}}</div>
-											</li>
-										</ul>
-										</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-head card-topline-aqua">
-										<header>Alamat Usaha</header>
-									</div>
-									<div class="card-body no-padding height-9">
-										<div class="row text-center m-t-10">
-											<div class="col-md-12">
-												<p id="businessAddress">{{alamat.usaha}}
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="card">
-									<div class="card-head card-topline-aqua">
-										<header>Data Rekening</header>
-									</div>
-									<div class="card-body no-padding height-9">
-										<ul class="list-group list-group-unbordered">
-											<li class="list-group-item">
-												<b>Bank</b>
-												<div class="profile-desc-item pull-right" id="bankName">{{bank}}</div>
-											</li>
-											<li class="list-group-item">
-												<b>No Rekening</b>
-												<div class="profile-desc-item pull-right" id="bankAccountId">{{no rek}}</div>
-											</li>
-											<li class="list-group-item">
-												<b>Atas Nama</b>
-												<div class="profile-desc-item pull-right" id="bankHolderName">{{Atas Nama}}</div>
-											</li>
-										</ul>
-										</div>
+					
+					<div class="col-lg-8 col-md-12 col-sm-12">
+						<div class="card set-height">
+							<div class="card-head card-topline-blue">
+								<header>Alamat Usaha</header>
+							</div>
+							<div class="card-body no-padding height-9">
+								<div class="row text-center m-t-10">
+									<div class="col-md-12">
+										<p id="businessAddress">{{alamat.usaha}}
+										</p>
 									</div>
 								</div>
 							</div>
-							<!-- END BEGIN PROFILE SIDEBAR -->
-							<!-- BEGIN PROFILE CONTENT -->
-							<div class="profile-content">
-								<div class="row">
-									<div class="profile-tab-box">
-										<div class="p-l-20">
-											<ul class="nav ">
-												<li class="nav-item tab-all"><a class="nav-link active show"
-														href="#tab1" data-toggle="tab">About Me</a></li>
-												<li class="nav-item tab-all p-l-20"><a class="nav-link" href="#tab3"
-														data-toggle="tab">Settings</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="white-box">
-										<!-- Tab panes -->
-										<div class="tab-content">
-											<div class="tab-pane active fontawesome-demo" id="tab1">
-												<div id="biography">
-													<div class="row">
-														<div class="col-md-3 col-6 b-r"> <strong>Nama Lengkap</strong>
-															<br>
-															<p class="text-muted" id="fullName">{{namauser}}</p>
-														</div>
-														<div class="col-md-3 col-6 b-r"> <strong>No. HP</strong>
-															<br>
-															<p class="text-muted" id="phone">{{no hp user}}</p>
-														</div>
-														<div class="col-md-3 col-6 b-r"> <strong>Email</strong>
-															<br>
-															<p class="text-muted" id="email">{{email user}}</p>
-														</div>
-														<div class="col-md-3 col-6"> <strong>Lokasi</strong>
-															<br>
-															<p class="text-muted" id="city">{{kota}}</p>
-														</div>
-													</div>
-													<hr>
-													<p class="m-t-30" id="description">{{deskripsi usaha}}</p>
-												</div>
-											</div>
-											<div class="tab-pane" id="tab3">
-												<div class="row">
-													<div class="col-md-12 col-sm-12">
-														<div class="card-head">
-															<header>Ganti Password</header>
-														</div>
-														<div class="card-body " id="bar-parent1">
-															<form>
-																<div class="form-group">
-																	<label for="simpleFormEmail">Email</label>
-																	<input type="email" class="form-control"
-																		id="simpleFormEmail"
-																		placeholder="Enter user name">
-																</div>
-																<div class="form-group">
-																	<label for="simpleFormPassword">Password Saat Ini</label>
-																	<input type="password" class="form-control"
-																		id="simpleFormPassword"
-																		placeholder="Password Sekarang">
-																</div>
-																<div class="form-group">
-																	<label for="simpleFormPassword">Password Baru</label>
-																	<input type="password" class="form-control"
-																		id="newpassword" placeholder="Password Baru">
-																</div>
-																<button type="submit"
-																	class="btn btn-primary">Submit</button>
-															</form>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+						</div>
+						<div class="card">
+							<div class="card-head card-topline-blue">
+								<header>Data Rekening</header>
 							</div>
-							<!-- END PROFILE CONTENT -->
+							<div class="card-body no-padding height-9">
+								<ul class="list-group list-group-unbordered">
+									<li class="list-group-item">
+										<b>Bank</b>
+										<div class="profile-desc-item pull-right" id="bankName">{{bank}}</div>
+									</li>
+									<li class="list-group-item">
+										<b>No Rekening</b>
+										<div class="profile-desc-item pull-right" id="bankAccountId">{{no rek}}</div>
+									</li>
+									<li class="list-group-item">
+										<b>Atas Nama</b>
+										<div class="profile-desc-item pull-right" id="bankHolderName">{{Atas Nama}}</div>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
-				<!-- end page content -->
+				<!-- END BEGIN PROFILE SIDEBAR -->
+
+				<!-- BEGIN PROFILE CONTENT -->
+				<div class="profile-content container">
+					<div class="row">
+						<div class="profile-tab-box">
+							<div class="p-l-20">
+								<ul class="nav ">
+									<li class="nav-item tab-all"><a class="nav-link active show"
+											href="#tab1" data-toggle="tab">About Me</a></li>
+									<li class="nav-item tab-all p-l-20"><a class="nav-link" href="#tab3"
+											data-toggle="tab">Settings</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="white-box">
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane active fontawesome-demo" id="tab1">
+									<div id="biography">
+										<div class="row">
+											<div class="col-lg-3 col-md-6 col-12 b-r"> <strong>Nama Lengkap</strong>
+												<br>
+												<p class="text-muted" id="fullName">{{namauser}}</p>
+											</div>
+											<div class="col-lg-3 col-md-6 col-12 b-r"> <strong>No. HP</strong>
+												<br>
+												<p class="text-muted" id="phone">{{no hp user}}</p>
+											</div>
+											<div class="col-lg-3 col-md-6 col-12 b-r"> <strong>Email</strong>
+												<br>
+												<p class="text-muted" id="email">{{email user}}</p>
+											</div>
+											<div class="col-lg-3 col-md-6 col-12"> <strong>Lokasi</strong>
+												<br>
+												<p class="text-muted" id="city">{{kota}}</p>
+											</div>
+										</div>
+										<hr>
+										<div class="col-12 px-0"><strong>Deskripsi Usaha</strong>
+											<p class="m-t-30" id="description">{{deskripsi usaha}}</p>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" id="tab3">
+									<div class="row">
+										<div class="col-md-12 col-sm-12">
+											<div class="card-head">
+												<header>Ganti Password</header>
+											</div>
+											<div class="card-body " id="bar-parent1">
+												<form>
+													<div class="form-group">
+														<label for="simpleFormEmail">Email</label>
+														<input type="email" class="form-control"
+															id="simpleFormEmail"
+															placeholder="Enter user name">
+													</div>
+													<div class="form-group">
+														<label for="simpleFormPassword">Password Saat Ini</label>
+														<input type="password" class="form-control"
+															id="simpleFormPassword"
+															placeholder="Password Sekarang">
+													</div>
+													<div class="form-group">
+														<label for="simpleFormPassword">Password Baru</label>
+														<input type="password" class="form-control"
+															id="newpassword" placeholder="Password Baru">
+													</div>
+													<button type="submit"
+														class="btn btn-primary">Submit</button>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PROFILE CONTENT -->
 			</div>
-			<!-- end page container -->
+			<!-- end page content -->
+		</div>
+		<!-- end page container -->
+
 		<!-- start footer -->
 		<div class="page-footer">
 			<div class="page-footer-inner"> 2020 &copy;
@@ -292,7 +296,6 @@
 			</div>
 		</div>
 		<!-- end footer -->
-		</div>
 	</div>
 	<!-- start js include path -->
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
@@ -319,36 +322,56 @@
 		};
 
 		const fetchUser = async () => {
+			let id;
+
 			try {
 				const apiUrlResponse = await fetch(`/api_url.txt`)
 				const apiUrl = await apiUrlResponse.text()
 				const apiKey = localStorage.getItem('apiKey')
-				const id = jwt_decode(apiKey).id
-				const response = await fetch(`${apiUrl}/users/${id}/view`, {
-						method: 'get',
-						headers: { authorization: localStorage.getItem('apiKey') },
-					})
+				const userId = jwt_decode(apiKey).id
+				const response = await fetch(`${apiUrl}/users/${userId}/view`, {
+					method: 'get',
+					headers: { authorization: localStorage.getItem('apiKey') },
+					});
 				if (response.status !== 200) throw await response.text()
-					res = await response.json();
-					profile = res.partners[0];
-					console.log(profile)
-					// renderProfile(, '#username');
-					renderProfile(profile.firstName, '#name');
-					renderProfile(profile.business.name, '#businessName');
-					renderProfile(profile.business.address, '#businessAddress');
-					renderProfile(profile.sex, '#sex');
-					renderProfile(profile.position, '#position');
-					renderProfile(profile.address, '#partnerAddress');
-					renderProfile(profile.bankName, '#bankName');
-					renderProfile(profile.bankAccountId, '#bankAccountId');
-					renderProfile(profile.bankHolderName, '#bankHolderName');
-					renderProfile(`${profile.firstName} ${profile.lastName}`, '#fullName');
-					renderProfile(profile.phone, '#phone');
-					renderProfile(profile.city, '#city');
-					renderProfile(profile.business.description, '#description');
-				} catch (e) {
-					console.error(e)
-				}
+				res = await response.json();
+				const profile = res.partners[0];
+				id = profile.id
+				console.log(profile)
+				renderProfile(profile.user.username, '#username');
+				renderProfile(profile.firstName, '#name');
+				renderProfile(profile.business.name, '#businessName');
+				renderProfile(profile.business.address, '#businessAddress');
+				renderProfile(profile.sex, '#sex');
+				renderProfile(profile.position, '#position');
+				renderProfile(profile.address, '#partnerAddress');
+				renderProfile(profile.bankName, '#bankName');
+				renderProfile(profile.bankAccountId, '#bankAccountId');
+				renderProfile(profile.bankHolderName, '#bankHolderName');
+				renderProfile(`${profile.firstName} ${profile.lastName}`, '#fullName');
+				renderProfile(profile.phone, '#phone');
+				renderProfile(profile.user.email, '#email');
+				renderProfile(profile.city, '#city');
+				renderProfile(profile.business.description, '#description');
+			} catch (e) {
+				console.error(e)
+			}
+
+
+			// try {
+			// 	const apiUrlResponse = await fetch(`/api_url.txt`)
+			// 	const apiUrl = await apiUrlResponse.text()
+			// 	const res = await fetch(`${apiUrl}/partners/${id}`, {
+			// 			method: 'get',
+			// 			headers: { authorization: localStorage.getItem('apiKey') },
+			// 		});
+			// 	if (res.status !== 200) throw await res.text();
+			// 		awaitres = await res.json();
+			// 		console.log('A2', awaitres)
+			// 	}  catch(e) {
+			// 	console.log('E2', e)
+			// }
+
 		}
 
 		fetchUser();
