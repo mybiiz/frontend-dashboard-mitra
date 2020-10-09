@@ -356,22 +356,6 @@
 			} catch (e) {
 				console.error(e)
 			}
-
-
-			// try {
-			// 	const apiUrlResponse = await fetch(`/api_url.txt`)
-			// 	const apiUrl = await apiUrlResponse.text()
-			// 	const res = await fetch(`${apiUrl}/partners/${id}`, {
-			// 			method: 'get',
-			// 			headers: { authorization: localStorage.getItem('apiKey') },
-			// 		});
-			// 	if (res.status !== 200) throw await res.text();
-			// 		awaitres = await res.json();
-			// 		console.log('A2', awaitres)
-			// 	}  catch(e) {
-			// 	console.log('E2', e)
-			// }
-
 		}
 
 		fetchUser();
