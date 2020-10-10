@@ -506,7 +506,10 @@
 
 				// <li onclick="selectServiceType(${serviceType.id})" class="mdl-menu__item" data-val="${serviceType.id}">${serviceType.name}</li>
 
-				document.querySelector(`#bidang-usaha-dropdown`).innerHTML = serviceTypesMapped
+				document.querySelector(`#bidang-usaha-dropdown`).innerHTML = `
+          <option value="0"></option>
+          ${serviceTypesMapped}
+        `
 			} catch (e) {
 				console.error(e)
 			}
