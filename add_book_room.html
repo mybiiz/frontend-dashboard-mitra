@@ -103,7 +103,7 @@
 								</li>
 								<li class="divider"> </li>
 								<li>
-									<a href="login.html">
+									<a href="#" id="logout-btn">
 										<i class="icon-logout"></i> Log Out </a>
 								</li>
 							</ul>
@@ -115,9 +115,9 @@
 		</div>
 		<!-- end header -->
 		<!-- start page container -->
-		<div class="page-container">
+		<div class="page-container row">
 			<!-- start sidebar menu -->
-			<div class="sidebar-container">
+			<div class="sidebar-container col-2 px-0">
 				<div class="sidemenu-container navbar-collapse collapse fixed-menu">
 					<div id="remove-scroll">
 						<ul class="sidemenu page-header-fixed p-t-20" data-keep-expanded="false" data-auto-scroll="true"
@@ -129,10 +129,9 @@
 							</li>
 							<li class="sidebar-user-panel">
 								<div class="user-panel">
-									<div class="row">
-										<div class="sidebar-userpic">
-											<img src="assets/img/dp.jpg" class="img-responsive" alt=""> </div>
-									</div>
+									<!-- <div class="sidebar-userpic">
+										<img src="assets/img/dp.jpg" class="img-responsive" alt="">
+									</div> -->
 									<div class="profile-usertitle">
 										<div class="sidebar-userpic-name"> {{user.name}} </div>
 									</div>
@@ -208,9 +207,9 @@
 			</div>
 			<!-- end sidebar menu -->
 			<!-- start page content -->
-			<div class="page-content-wrapper">
+			<div class="page-content-wrapper col-10">
 				<div class="page-content">
-					<div class="page-bar">
+					<div class="page-bar container mb-0">
 						<div class="page-title-breadcrumb">
 							<div class=" pull-left">
 								<div class="page-title">Tambah Booking</div>
@@ -225,126 +224,156 @@
 							</ol>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="card-box">
-								<div class="card-head">
-									<header>Detail Booking</header>
-									</ul>
-								</div>
-								<div class="card-body row">
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtFirstName">
-											<label class="mdl-textfield__label">Nama Depan</label>
-										</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card-box">
+									<div class="card-head">
+										<header>Detail Booking</header>
+										</ul>
 									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="txtLasttName">
-											<label class="mdl-textfield__label">Nama Belakang</label>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="email" id="txtemail">
-											<label class="mdl-textfield__label">Email</label>
-											<span class="mdl-textfield__error">Masukan Email dengan benar!</span>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="sample2" value=""
-												readonly tabIndex="-1">
-											<label for="sample2" class="pull-right margin-0">
-												<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-											</label>
-											<label for="sample2" class="mdl-textfield__label">Jenis Kelamin</label>
-											<ul data-mdl-for="sample2"
-												class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-												<li class="mdl-menu__item" data-val="DE">Pria</li>
-												<li class="mdl-menu__item" data-val="BY">Wanita</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text"
-												pattern="-?[0-9]*(\.[0-9]+)?" id="text5">
-											<label class="mdl-textfield__label" for="text5">Nomor Handphone</label>
-											<span class="mdl-textfield__error">Nomor harus dimasukan!</span>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="daterange" readonly="readonly">
-											<label class="mdl-textfield__label">Check In-Check Out</label>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="list2" value="" readonly
-												tabIndex="-1">
-											<label for="list2" class="pull-right margin-0">
-												<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-											</label>
-											<label for="list2" class="mdl-textfield__label">Jumlah Tamu</label>
-											<ul data-mdl-for="list2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-												<li class="mdl-menu__item" data-val="1">1</li>
-												<li class="mdl-menu__item" data-val="2">2</li>
-												<li class="mdl-menu__item" data-val="3">3</li>
-												<li class="mdl-menu__item" data-val="4">4</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-lg-6 p-t-20">
-										<div
-											class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-											<input class="mdl-textfield__input" type="text" id="list3" value="" readonly
-												tabIndex="-1">
-											<label for="list3" class="pull-right margin-0">
-												<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-											</label>
-											<label for="list3" class="mdl-textfield__label">Tipe Room</label>
-											<ul data-mdl-for="list3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-												<li class="mdl-menu__item" data-val="1">Single</li>
-												<li class="mdl-menu__item" data-val="2">Double</li>
-												<li class="mdl-menu__item" data-val="3">Double-Deluxe</li>
-												<li class="mdl-menu__item" data-val="4">Twin</li>
-												<li class="mdl-menu__item" data-val="5">Suite Family</li>
-												<li class="mdl-menu__item" data-val="6">King/Superior</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-lg-12 p-t-20">
-										<label class="control-label col-md-3">Upload Bukti Pembayaran</label>
-										<form id="id_dropzone" class="dropzone">
-											<div class="dz-message">
-												<div class="dropIcon">
-													<i class="material-icons">cloud_upload</i>
-												</div>
-												<h3>Seret gambar ke sini atau klik untuk mengunggah.</h3>
+									<div class="card-body row">
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+												<input class="mdl-textfield__input" type="text" id="firstName">
+												<label class="mdl-textfield__label">Nama Depan</label>
 											</div>
-										</form>
-									</div>
-									<div class="col-lg-12 p-t-20">
-										<div class="mdl-textfield mdl-js-textfield txt-full-width">
-											<textarea class="mdl-textfield__input" rows="4" id="education"></textarea>
-											<label class="mdl-textfield__label" for="text7">Catatan</label>
 										</div>
-									</div>
-									<div class="col-lg-12 p-t-20 text-center">
-										<button type="button"
-											class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Submit</button>
-										<button type="button"
-											class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+												<input class="mdl-textfield__input" type="text" id="lastName">
+												<label class="mdl-textfield__label">Nama Belakang</label>
+											</div>
+										</div>
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+												<input class="mdl-textfield__input" type="email" id="email">
+												<label class="mdl-textfield__label">Email</label>
+												<span class="mdl-textfield__error">Masukan Email dengan benar!</span>
+											</div>
+										</div>
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+												<input class="mdl-textfield__input" type="text" id="sex" value=""
+													readonly tabIndex="-1">
+												<label for="sex" class="pull-right margin-0">
+													<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+												</label>
+												<label for="sex" class="mdl-textfield__label">Jenis Kelamin</label>
+												<ul data-mdl-for="sex"
+													class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+													<li class="mdl-menu__item" data-val="DE">Pria</li>
+													<li class="mdl-menu__item" data-val="BY">Wanita</li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+												<input class="mdl-textfield__input" type="text"
+													pattern="-?[0-9]*(\.[0-9]+)?" id="phone">
+												<label class="mdl-textfield__label" for="text5">Nomor Handphone</label>
+												<span class="mdl-textfield__error">Nomor harus dimasukan!</span>
+											</div>
+										</div>
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+												<input class="mdl-textfield__input" type="text" id="daterange" readonly="readonly">
+												<label class="mdl-textfield__label">Check In-Check Out</label>
+											</div>
+										</div>
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+												<input class="mdl-textfield__input" type="text" id="guests" value="" readonly
+													tabIndex="-1">
+												<label for="guests" class="pull-right margin-0">
+													<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+												</label>
+												<label for="guests" class="mdl-textfield__label">Jumlah Tamu</label>
+												<ul data-mdl-for="guests" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+													<li class="mdl-menu__item" data-val="1">1</li>
+													<li class="mdl-menu__item" data-val="2">2</li>
+													<li class="mdl-menu__item" data-val="3">3</li>
+													<li class="mdl-menu__item" data-val="4">4</li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-lg-6 p-t-20">
+											<div
+												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+												<input class="mdl-textfield__input" type="text" id="roomType" value="" readonly
+													tabIndex="-1">
+												<label for="roomType" class="pull-right margin-0">
+													<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+												</label>
+												<label for="roomType" class="mdl-textfield__label">Tipe Room</label>
+												<ul data-mdl-for="roomType" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+													<li class="mdl-menu__item" data-val="1">Single</li>
+													<li class="mdl-menu__item" data-val="2">Double</li>
+													<li class="mdl-menu__item" data-val="3">Double-Deluxe</li>
+													<li class="mdl-menu__item" data-val="4">Twin</li>
+													<li class="mdl-menu__item" data-val="5">Suite Family</li>
+													<li class="mdl-menu__item" data-val="6">King/Superior</li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-lg-12 p-t-20">
+											<label class="control-label col-md-3">Upload Bukti Pembayaran</label>
+												<!-- <form id="id_dropzone"
+													class="dropzone"
+													ondrop="dropHandler(event)" ondragleave="dragLeaveHandler(event)" ondragover="dragOverHandler(event)"
+												>
+												<div class="dz-message">
+													<div class="dropIcon">
+														<i class="material-icons">cloud_upload</i>
+													</div>
+													<h3>Seret gambar ke sini atau klik untuk mengunggah.</h3>
+												</div>
+											</form> -->
+											<form
+												id="file-upload-form"
+												class="uploader"
+												ondrop="dropHandler(event)" ondragleave="dragLeaveHandler(event)" ondragover="dragOverHandler(event)">
+												<input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+												<label for="file-upload" id="file-drag">
+													<img id="file-image" src="#" alt="Preview" class="hidden">
+													<div id="start">
+														<i class="material-icons" aria-hidden="true">cloud_upload</i>
+														<h3>Seret gambar ke sini atau klik untuk mengunggah.</h3>
+													</div>
+												</label>
+												<div class="col-lg-6 p-t-20">
+													<button id="clear-img-btn" class="btn btn-secondary">Hapus foto</button>
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-12 p-t-20">
+											<div class="mdl-textfield mdl-js-textfield txt-full-width">
+												<textarea class="mdl-textfield__input" rows="4" id="note"></textarea>
+												<label class="mdl-textfield__label" for="text7">Catatan</label>
+											</div>
+										</div>
+										<div class="col-lg-12 p-t-20 text-center">
+											<button type="button"
+												class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink"
+												id="submitBtn"
+											>
+												Submit
+											</button>
+											<button
+												type="button"
+												class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default"
+												id="cancelBtn"
+											>
+												Cancel
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -389,6 +418,95 @@
 	<!-- animation -->
 	<script src="assets/js/pages/ui/animations.js"></script>
 	<!-- end js include path -->
+	<script>
+		let sex, date, guests;
+		let megabytesLimit = 2 * 1024 * 1024;
+
+		document.querySelector('#logout-btn').addEventListener('click', e => {
+			localStorage.removeItem("apiKey")
+			window.location = '/'
+		});
+
+		document.querySelector('#cancelBtn').addEventListener('click', () => window.history.back());
+
+		document.querySelector('#submitBtn').addEventListener('click', async (e) => {
+			e.preventDefault();
+
+			const firstName = document.querySelector('#firstName').value;
+			const lastName = document.querySelector('#lastName').value;
+			const email = document.querySelector('#email').value;
+			const sex = document.querySelector('#sex').value;
+			const phone = document.querySelector('#phone').value;
+			const daterange = document.querySelector('#daterange').value;
+			const guests = document.querySelector('#guests').value;
+			const roomType = document.querySelector('#roomType').value;
+
+			const note = document.querySelector('#note').value;
+			
+			// Validation
+			if (firstName === '')
+				alert('Harap isi nama depan dengan benar!')
+			else if (lastName === '')
+				alert('Harap isi nama belakang dengan benar!')
+			else if (email === '')
+				alert('Harap isi email dengan benar!')
+			else if (sex === '')
+				alert('Harap pilih jenis kelamin!')
+			else if (phone === '')
+				alert('Harap isi nomor telepon dengan benar!')
+			else if (daterange === '')
+				alert('Harap pilih tanggal check in dan check out!')
+			else if (guests === '')
+				alert('Harap isi jumlah tamu!')
+			else if (roomType === '')
+				alert('Harap pilih tipe room!')
+			else {
+				console.log('Book berhasil dibuat')
+			}
+		});
+
+		const checkAndAddFile = (file) => {
+			if (file.size > megabytesLimit) {
+				alert(`Ukuran file melebihi batas! Max: 2MB, file yg diupload: ${Math.round(file.size/1024/1024)}MB`)
+			} else {
+				const reader = new FileReader()
+				reader.readAsDataURL(file)
+				reader.onload = () => {
+					const imgResult = reader.result
+					imgResultBase64 = imgResult;
+					document.querySelector('#file-image').src = imgResult;
+					document.querySelector('#file-image').classList.remove('hidden');
+					document.querySelector('#start').classList.add('hidden');
+				}
+				reader.onerror = () => {
+					document.querySelector('#file-image').classList.add('hidden');
+					document.querySelector('#start').classList.remove('hidden');
+				}
+			}
+		}
+
+		document.querySelector('#file-upload').addEventListener('change', e => {
+			e.preventDefault()
+			checkAndAddFile(e.target.files[0])
+		});
+
+		document.querySelector('#clear-img-btn').addEventListener('click', e => {
+			e.preventDefault()
+			imgResultBase64 = ''
+			document.querySelector('#file-image').src = '';
+			document.querySelector('#file-image').classList.add('hidden');
+			document.querySelector('#start').classList.remove('hidden');
+		})
+
+		const dropHandler = e => {
+			e.preventDefault();
+			checkAndAddFile(e.dataTransfer.files[0])
+		}
+
+		const dragOverHandler = e => {
+			e.preventDefault();
+		}
+	</script>
 </body>
 
 </html>

@@ -112,10 +112,10 @@
 		</div>
 		<!-- end header -->
 		<!-- start page container -->
-		<div class="page-container">
+		<div class="page-container row">
 			<!-- start sidebar menu -->
-			<div class="sidebar-container">
-				<div class="sidemenu-container navbar-collapse collapse fixed-menu">
+			<div class="sidebar-container col-2 px-0">
+				<div class="sidemenu-container navbar-collapse collapse fixed-menu w-100">
 					<div id="remove-scroll">
 						<ul class="sidemenu page-header-fixed p-t-20" data-keep-expanded="false" data-auto-scroll="true"
 							data-slide-speed="200">
@@ -126,10 +126,6 @@
 							</li>
 							<li class="sidebar-user-panel">
 								<div class="user-panel">
-									<div class="row">
-										<div class="sidebar-userpic">
-											<img src="assets/img/dp.jpg" class="img-responsive" alt=""> </div>
-									</div>
 									<div class="profile-usertitle">
 										<div class="sidebar-userpic-name"> {{user.name}} </div>
 									</div>
@@ -205,9 +201,9 @@
 			</div>
 			<!-- end sidebar menu -->
 			<!-- start page content -->
-			<div class="page-content-wrapper">
-				<div class="page-content">
-					<div class="page-bar">
+			<div class="page-content-wrapper col-10 px-0">
+				<div class="page-content mx-0">
+					<div class="page-bar container mb-0">
 						<div class="page-title-breadcrumb">
 							<div class=" pull-left">
 								<div class="page-title">Dashboard</div>
@@ -221,20 +217,22 @@
 						</div>
 					</div>
 					<!-- start widget -->
-					<div class="state-overview">
+					<div class="state-overview container mb-4">
 						<div class="row">
 							<div class="col-xl-3 col-md-6 col-12">
-								<div class="info-box bg-blue">
-									<span class="info-box-icon push-bottom"><i class="material-icons">style</i></span>
-									<div class="info-box-content">
-										<span class="info-box-text">Booking Masuk</span>
+								<div class="info-box bg-purple d-flex flex-column">
+									<span class="info-box-text">Booking Masuk</span>
+									<div class="info-box-content d-flex align-items-center">
+										<span class="info-box-icon">
+											<i class="material-icons">style</i>
+										</span>
 										<span class="info-box-number">{{jumlah pesanan}}</span>
-										<div class="progress">
+										<!-- <div class="progress">
 											<div class="progress-bar width-60"></div>
 										</div>
 										<span class="progress-description">
 											{{progress %}}
-										</span>
+										</span> -->
 									</div>
 									<!-- /.info-box-content -->
 								</div>
@@ -242,18 +240,19 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-xl-3 col-md-6 col-12">
-								<div class="info-box bg-orange">
-									<span class="info-box-icon push-bottom"><i
-											class="material-icons">card_travel</i></span>
-									<div class="info-box-content">
-										<span class="info-box-text">Booking Baru</span>
-										<span class="info-box-number">{{jumlah booking baru}}</span>
-										<div class="progress">
+								<div class="info-box bg-purple d-flex flex-column">
+									<span class="info-box-text">Booking Baru</span>
+									<div class="info-box-content d-flex align-items-center">
+										<span class="info-box-icon"><i
+											class="material-icons">card_travel</i>
+										</span>
+										<span class="info-box-number">{{jml booking baru}}</span>
+										<!-- <div class="progress">
 											<div class="progress-bar width-40"></div>
 										</div>
 										<span class="progress-description">
 											{{progress %}}
-										</span>
+										</span> -->
 									</div>
 									<!-- /.info-box-content -->
 								</div>
@@ -261,18 +260,19 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-xl-3 col-md-6 col-12">
-								<div class="info-box bg-purple">
-									<span class="info-box-icon push-bottom"><i
-											class="material-icons">monetization_on</i></span>
-									<div class="info-box-content">
-										<span class="info-box-text">Pemasukan Perbulan</span>
-										<span class="info-box-number">Rp</span><span>{{jumlah pemasukan perbulan}}</span>
-										<div class="progress">
+								<div class="info-box bg-purple d-flex flex-column ">
+									<span class="info-box-text">Pemasukan Perbulan</span>
+									<div class="info-box-content d-flex align-items-center">
+										<span class="info-box-icon"><i
+											class="material-icons">monetization_on</i>
+										</span>
+										<span class="info-box-number">Rp {{jumlah pemasukan perbulan}}</span>
+										<!-- <div class="progress">
 											<div class="progress-bar width-80"></div>
 										</div>
 										<span class="progress-description">
 											{{progress %}}
-										</span>
+										</span> -->
 									</div>
 									<!-- /.info-box-content -->
 								</div>
@@ -280,18 +280,19 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-xl-3 col-md-6 col-12">
-								<div class="info-box bg-success">
-									<span class="info-box-icon push-bottom"><i
-											class="material-icons">monetization_on</i></span>
-									<div class="info-box-content">
-										<span class="info-box-text">Total Pemasukan</span>
-										<span class="info-box-number">Rp</span><span>{{jumlah total pemasukan sejak bergabung}}</span>
-										<div class="progress">
+								<div class="info-box bg-purple d-flex flex-column ">
+									<span class="info-box-text">Total Pemasukan</span>
+									<div class="info-box-content d-flex align-items-center">
+										<span class="info-box-icon"><i
+											class="material-icons">monetization_on</i>
+										</span>
+										<span class="info-box-number">Rp {{jumlah pemasukan perbulan}}</span>
+										<!-- <div class="progress">
 											<div class="progress-bar width-60"></div>
 										</div>
 										<span class="progress-description">
 											{{progress %}}
-										</span>
+										</span> -->
 									</div>
 									<!-- /.info-box-content -->
 								</div>
@@ -303,52 +304,54 @@
 					<!-- end widget -->
 
 					<!-- start Payment Details -->
-					<div class="row">
-						<div class="col-md-12 col-sm-12">
-							<div class="card  card-box">
-								<div class="card-head">
-									<header>Detail Booking</header>
-									<div class="tools">
-										<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-										<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-										<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="card  card-box">
+									<div class="card-head">
+										<header>Detail Booking</header>
+										<div class="tools">
+											<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+											<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+											<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+										</div>
 									</div>
-								</div>
-								<div class="card-body ">
-									<div class="table-wrap">
-										<div class="table-responsive">
-											<table class="table display product-overview mb-30" id="support_table5">
-												<thead>
-													<tr>
-														<th>No</th>
-														<th>Nama</th>
-														<th>Check In</th>
-														<th>Check Out</th>
-														<th>Status Pembayaran</th>
-														<th>No Telp</th>
-														<th>Tipe</th>
-														<th>Cancel</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>{{number}}</td>
-														<td>{{nama.pemesan}}</td>
-														<td>{{tgl.checkin}}</td>
-														<td>{{tgl.checkout}}</td>
-														<td>
-															<span class="label label-sm label-success">{{status pembayaran}}</span>
-														</td>
-														<td>{{notelp.pemesan}}</td>
-														<td>{{tipe dapat berupa tipe kamar, tipe laundry, plat mobil}}</td>
-														<td>
-															<button class="btn btn-tbl-delete btn-xs">
-																<i class="fa fa-trash-o "></i>
-															</button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
+									<div class="card-body ">
+										<div class="table-wrap">
+											<div class="table-responsive">
+												<table class="table display product-overview mb-30" id="support_table5">
+													<thead>
+														<tr>
+															<th>No</th>
+															<th>Nama</th>
+															<th>Check In</th>
+															<th>Check Out</th>
+															<th>Status Pembayaran</th>
+															<th>No Telp</th>
+															<th>Tipe</th>
+															<th>Cancel</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{number}}</td>
+															<td>{{nama.pemesan}}</td>
+															<td>{{tgl.checkin}}</td>
+															<td>{{tgl.checkout}}</td>
+															<td>
+																<span class="label label-sm label-success">{{status pembayaran}}</span>
+															</td>
+															<td>{{notelp.pemesan}}</td>
+															<td>{{tipe dapat berupa tipe kamar, tipe laundry, plat mobil}}</td>
+															<td class="text-center">
+																<button class="btn btn-tbl-delete btn-lg">
+																	<i class="fa fa-trash-o "></i>
+																</button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -356,45 +359,47 @@
 						</div>
 					</div>
 					<!-- end Payment Details -->
-					<div class="row">
-						<div class="col-lg-8 col-md-12 col-sm-12 col-12">
-							<div class="card-box ">
-								<div class="card-head">
-									<header>Ulasan Pelanggan</header>
-									<div class="tools">
-										<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-										<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-										<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<div class="card-box ">
+									<div class="card-head">
+										<header>Ulasan Pelanggan</header>
+										<div class="tools">
+											<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+											<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+											<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+										</div>
 									</div>
-								</div>
-								<div class="card-body ">
-									<div class="row">
-										<ul class="docListWindow small-slimscroll-style">
-											<li>
-												<div class="row">
-													<div class="col-md-8 col-sm-8">
-														<div class="prog-avatar">
-															<img src="../.." alt="" width="40" height="40"> <!--foto user.pelanggan-->
-														</div>
-														<div class="details">
-															<div class="title">
-																<a href="#">{{nama.user}}</a>
-																<p class="rating-text">{{teks ulasan}}</p>
+									<div class="card-body ">
+										<div class="row">
+											<ul class="docListWindow small-slimscroll-style">
+												<li>
+													<div class="row">
+														<div class="">
+															<div class="prog-avatar">
+																<img src="../.." alt="" width="40" height="40"> <!--foto user.pelanggan-->
+															</div>
+															<div class="details">
+																<div class="title">
+																	<a href="#">{{nama.user}}</a>
+																	<p class="rating-text">{{teks ulasan}}</p>
+																</div>
 															</div>
 														</div>
+														<div class="rating-style">
+															<i class="material-icons">star</i>
+															<i class="material-icons">star</i>
+															<i class="material-icons">star</i>
+															<i class="material-icons">star_half</i>
+															<i class="material-icons">star_border</i>
+														</div>
 													</div>
-													<div class="col-md-4 col-sm-4 rating-style">
-														<i class="material-icons">star</i>
-														<i class="material-icons">star</i>
-														<i class="material-icons">star</i>
-														<i class="material-icons">star_half</i>
-														<i class="material-icons">star_border</i>
-													</div>
-												</div>
-											</li>
-										</ul>
-										<div class="full-width text-center p-t-10">
-											<a href="#" class="btn purple btn-outline btn-circle margin-0">View All</a>
+												</li>
+											</ul>
+											<div class="full-width text-center p-t-10">
+												<a href="#" class="btn purple btn-outline btn-circle margin-0">View All</a>
+											</div>
 										</div>
 									</div>
 								</div>
