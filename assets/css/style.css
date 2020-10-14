@@ -4312,8 +4312,8 @@ h4.media-heading {
 }
 .card-head .tools .btn-color {
     color: #97a0b3;
-    margin-right: 3px;
-    font-size: 12px;
+    margin-right: 5px;
+    font-size: 18px;
 }
 .card-head .tools .btn-color:hover {
     color: black;
@@ -5091,6 +5091,7 @@ tr.group:hover {
     padding: 5px !important;
     color: #fff !important;
     box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+    width: 35px;
 }
 .btn-tbl-edit:HOVER, .btn-tbl-delete:HOVER{
 	color: #fff;
@@ -8386,4 +8387,51 @@ span.notificationtime {
 .selector-title{
 	margin-top: 0px !important; 
 	color: #000000;
+}
+
+
+/* Custom Uploader */
+.uploader {
+    display: block;
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+}
+.uploader input[type="file"] {
+    display: none;
+}
+.uploader label {
+    float: left;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    border: 2px dashed rgba(0, 0, 0, 0.3);
+    transition: all .2s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 270px;
+}
+.uploader #file-image.hidden {
+    display: none;
+}
+.uploader #file-image {
+    display: inline;
+    margin: 0 auto .5rem auto;
+    width: auto;
+    height: 100%;
+    padding: .5rem;
+}
+.uploader #start {
+    float: left;
+    clear: both;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.uploader .material-icons {
+    font-size: 75px;
 }

@@ -317,7 +317,7 @@
         width: 235px
     }
     .sidemenu-container {
-        width: 235px;
+        width: 100%;
         float: left;
         position: relative;
         margin-right: -100%
@@ -631,10 +631,10 @@
     }
     .page-content-wrapper {
         float: left;
-        width: 100%
+        width: 100%;
+        padding: 0;
     }
     .page-content-wrapper .page-content {
-        margin-left: 235px;
         margin-top: 0;
     }
     .page-content-wrapper .page-content.no-min-height {
