@@ -114,9 +114,9 @@
 		</div>
 		<!-- end header -->
 		<!-- start page container -->
-		<div class="page-container">
+		<div class="page-container row">
 			<!-- start sidebar menu -->
-			<div class="sidebar-container">
+			<div class="sidebar-container col-2 px-0">
 				<div class="sidemenu-container navbar-collapse collapse fixed-menu">
 					<div id="remove-scroll">
 						<ul class="sidemenu page-header-fixed p-t-20" data-keep-expanded="false" data-auto-scroll="true"
@@ -128,10 +128,11 @@
 							</li>
 							<li class="sidebar-user-panel">
 								<div class="user-panel">
-									<div class="row">
+									<!-- <div class="row">
 										<div class="sidebar-userpic">
-											<img src="assets/img/dp.jpg" class="img-responsive" alt=""> </div>
-									</div>
+											<img src="assets/img/dp.jpg" class="img-responsive" alt="">
+										</div>
+									</div> -->
 									<div class="profile-usertitle">
 										<div class="sidebar-userpic-name"> {{user.name}} </div>
 									</div>
@@ -207,7 +208,7 @@
 			</div>
 			<!-- end sidebar menu -->
 			<!-- start page content -->
-			<div class="page-content-wrapper">
+			<div class="page-content-wrapper col-10">
 				<div class="page-content">
 					<div class="page-bar">
 						<div class="page-title-breadcrumb">
@@ -224,79 +225,81 @@
 							</ol>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card card-box">
-								<div class="card-head">
-									<header>Booking</header>
-									<div class="tools">
-										<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-										<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-										<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
-									</div>
-								</div>
-								<div class="card-body ">
-									<div class="row p-b-20">
-										<div class="col-md-6 col-sm-6 col-6">
-											<div class="btn-group">
-												<a href="new_booking.html" id="addRow" class="btn btn-info">
-													Tambah <i class="fa fa-plus"></i>
-												</a>
-											</div>
-										</div>
-										<div class="col-md-6 col-sm-6 col-6">
-											<div class="btn-group pull-right">
-												<a class="btn deepPink-bgcolor  btn-outline dropdown-toggle"
-													data-toggle="dropdown">Export
-													<i class="fa fa-angle-down"></i>
-												</a>
-												<ul class="dropdown-menu pull-right">
-													<li>
-														<a href="javascript:;">
-															<i class="fa fa-print"></i> Print </a>
-													</li>
-													<li>
-														<a href="javascript:;">
-															<i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-													</li>
-													<li>
-														<a href="javascript:;">
-															<i class="fa fa-file-excel-o"></i> Export to Excel </a>
-													</li>
-												</ul>
-											</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-box">
+									<div class="card-head">
+										<header>Booking</header>
+										<div class="tools">
+											<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+											<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+											<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
 										</div>
 									</div>
-									<div class="table-scrollable">
-										<table class="table table-hover table-checkable order-column full-width"
-											id="example4">
-											<thead>
-												<tr>
-													<th class="center"> Nama </th>
-													<th class="center"> No HP </th>
-													<th class="center"> Email </th>
-													<th class="center"> Check-In </th>
-													<th class="center"> Check-Out </th>
-													<th class="center"> Tipe Kamar </th>
-													<th class="center"> Status Pembayaran </th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class="odd gradeX">
-													<td class="center">{{User.Name}}</td>
-													<td class="center"><a href="tel:{{NoHP.User}}">
-															{{NoHP.User}} </a></td>
-													<td class="center"><a href="mailto:{{email.User}} ">
-															{{Email.USer}} </a></td>
-													<td class="center">{{tgl checkin}}</td>
-													<td class="center">{{tgl checkout}}</td>
-													<td class="center">{{tipe kamar}}</td>
-													<td class="center">
-														<span class="label label-sm label-success">{{status}} </span>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+									<div class="card-body ">
+										<div class="row p-b-20">
+											<div class="col-md-6 col-sm-6 col-6">
+												<div class="btn-group">
+													<a href="new_booking.html" id="addRow" class="btn btn-info">
+														Tambah <i class="fa fa-plus"></i>
+													</a>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6 col-6">
+												<div class="btn-group pull-right">
+													<a class="btn deepPink-bgcolor  btn-outline dropdown-toggle"
+														data-toggle="dropdown">Export
+														<i class="fa fa-angle-down"></i>
+													</a>
+													<ul class="dropdown-menu pull-right">
+														<li>
+															<a href="javascript:;">
+																<i class="fa fa-print"></i> Print </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+																<i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+																<i class="fa fa-file-excel-o"></i> Export to Excel </a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="table-scrollable">
+											<table class="table table-hover table-checkable order-column full-width"
+												id="example4">
+												<thead>
+													<tr>
+														<th class="center"> Nama </th>
+														<th class="center"> No HP </th>
+														<th class="center"> Email </th>
+														<th class="center"> Check-In </th>
+														<th class="center"> Check-Out </th>
+														<th class="center"> Tipe Kamar </th>
+														<th class="center"> Status Pembayaran </th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd gradeX">
+														<td class="center">{{User.Name}}</td>
+														<td class="center"><a href="tel:{{NoHP.User}}">
+																{{NoHP.User}} </a></td>
+														<td class="center"><a href="mailto:{{email.User}} ">
+																{{Email.USer}} </a></td>
+														<td class="center">{{tgl checkin}}</td>
+														<td class="center">{{tgl checkout}}</td>
+														<td class="center">{{tipe kamar}}</td>
+														<td class="center">
+															<span class="label label-sm label-success">{{status}} </span>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>

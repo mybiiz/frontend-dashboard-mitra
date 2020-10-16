@@ -1176,7 +1176,10 @@
 	}
 	.page-boxed .page-header-inner.container {
     	display: block;
-	}
+    }
+    .container {
+        max-width: 1700px;
+    }
 }
 @media print {
     body {
