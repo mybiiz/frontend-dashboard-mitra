@@ -314,18 +314,42 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<!-- <div class="card-box"> -->
-													<div class="card-head">
-														<header>Data Rekening Bank</header>
-														</ul>
+												
+									<!-- <div class="row">
+										<form class="dropzone" action="" method="post" enctype="multipart/form-data">
+											<input type="file" name="file" />
+										</form>
+									</div> -->
+									<div class="row">
+										<div class="col-sm-12">
+											<!-- <div class="card-box"> -->
+												<div class="card-head">
+													<header>Data Rekening Bank</header>
+													</ul>
+												</div>
+												<div class="card-body row">
+													<!-- <div class="col-lg-6 p-t-20">
+														<div
+															class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+															<input class="mdl-textfield__input" type="text" id="txtBank">
+															<label class="mdl-textfield__label">Bank</label>
+														</div>
+													</div> -->
+													<div class="col-lg-6 p-t-20">
+														<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+															<select class="mdl-textfield__input" id="bank-dropdown" name="bank">
+															</select>
+															<label class="mdl-textfield__label" for="octane">Bank</label>
+														</div>
 													</div>
 													<div class="card-body row">
-														<div class="col-lg-6 p-t-20">
+														<!-- <div class="col-lg-6 p-t-20">
 															<div
 																class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
 																<input class="mdl-textfield__input" type="text" id="txtBank">
 																<label class="mdl-textfield__label">Bank</label>
 															</div>
-														</div>
+														</div> -->
 														<div class="col-lg-6 p-t-20">
 															<div
 																class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
@@ -411,6 +435,8 @@
 		let ktpImageBas64 = ''
 		let userInfo = null
 		let serviceTypes = []
+		let banks = []
+		let bankId = 0
 		let serviceTypeId = 0
 		let sex = null
 
@@ -517,6 +543,38 @@
 			}
 		}
 
+		const fetchBanks = async () => {
+			try {
+				const apiUrlResponse = await fetch(`/api_url.txt`)
+				const apiUrl = await apiUrlResponse.text()
+				const apiKey = localStorage.getItem('apiKey')
+				const id = jwt_decode(apiKey).id
+ 				const banksResponse = await fetch(`${apiUrl}/banks`, {
+					headers: { 
+						authorization: apiKey,
+					}
+				}) 
+				if (banksResponse.status !== 200) throw await response.text()
+				banks = await banksResponse.json()
+				console.log('banks:', banks)
+
+				const banksMapped = banks.map(bank => `
+					<option value="${bank.id}">${bank.code} - ${bank.name}</option>					
+				`).join('')
+
+				// <li onclick="selectServiceType(${serviceType.id})" class="mdl-menu__item" data-val="${serviceType.id}">${serviceType.name}</li>
+
+				document.querySelector(`#bank-dropdown`).innerHTML = `
+          <option value="0"></option>
+          ${banksMapped}
+        `
+			} catch (e) {
+				console.error(e)
+			}
+		}
+
+		
+
     document.querySelector('#bidang-usaha-dropdown').addEventListener('change', e => {
       serviceTypeId = parseInt(e.target.value)
     })
@@ -528,9 +586,14 @@
 			// document.querySelector('#bidang-usaha-dropdown').value = foundServiceType.name
 		}
 
+		document.querySelector('#bank-dropdown').addEventListener('change', e => {
+			bankId = parseInt(e.target.value)
+		})
+
 		fetchUser()
 		fetchServiceTypes()
-		
+		fetchBanks()
+
 		document.querySelector('#datamitra-submit').addEventListener('click', async e => {
 			e.preventDefault()
 			
@@ -544,7 +607,7 @@
 			const usaha = document.querySelector('#txtusaha').value
 			const alamatUsaha = document.querySelector('#txtalamatusaha').value
 			const businessDesc = document.querySelector('#txtbusinessdesc').value
-			const bank = document.querySelector('#txtBank').value
+			// const bank = document.querySelector('#txtBank').value
 			const noRek = document.querySelector('#txtNoRek').value
 			const atasNama = document.querySelector('#txtAtasNama').value
 			// const dropzoneId = document.querySelector('#id_dropzone').innerHTML
@@ -570,14 +633,16 @@
 				alert('Harap isi alamat usaha dengan benar!')
 			else if (businessDesc === '')
 				alert('Harap isi deskripsi bisnis dengan benar!')
-			else if (bank === '')
-				alert('Harap isi bank dengan benar!')
+			// else if (bank === '')
+			// 	alert('Harap isi bank dengan benar!')
 			else if (noRek === '')
 				alert('Harap isi nomor rekening dengan benar!')
 			else if (atasNama === '')
 				alert('Harap isi atas nama dengan benar!')
 			else if (serviceTypeId === 0)
-				alert('Harap isi bidang bisnis dengan benar!')
+				alert('Harap isi bidang usaha dengan benar!')
+			else if (bankId === 0)
+				alert('Harap isi bank dengan benar!')
 			else if (ktpImageBas64 === '')
 				alert('Harap upload KTP yang valid!')
 			else if (sex === null)
@@ -602,9 +667,9 @@
 						city: domisili,
 						position: jabatan,
 						sex: sex,
-						bankName: bank,
+						bankName: "",
 						bank: null,
-						bankId: 0,
+						bankId: bankId,
 						bankAccountId: noRek,
 						bankHolderName: atasNama,
 						email: email,
