@@ -443,7 +443,38 @@
 	<script src="assets/plugins/morris/morris.min.js"></script>
 	<script src="assets/plugins/morris/raphael-min.js"></script>
 	<script src="assets/js/pages/chart/morris/morris_home_data.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<!-- end js include path -->
+	<script>
+		const renderDashboard = (data, selector) => {
+			var node = document.querySelector(selector);
+			if (!node) return;
+			node.innerHTML = data;
+		};
+
+		const fetchDashboardData = async () => {
+			try {
+				const apiUrlResponse = await fetch(`/api_url.txt`)
+				const apiUrl = await apiUrlResponse.text()
+				const apiKey = localStorage.getItem('apiKey')
+				const userId = jwt_decode(apiKey).id
+				const response = await fetch(`${apiUrl}/users/${userId}/view`, {
+					method: 'get',
+					headers: { authorization: localStorage.getItem('apiKey') },
+					});
+				if (response.status !== 200) throw await response.text()
+				res = await response.json();
+				const profile = res.partners[0];
+				let id = profile.id
+				console.log(profile)
+				// renderDashboard(, '#');
+			} catch (e) {
+				console.error(e)
+			}
+		}
+
+		fetchDashboardData();
+	</script>
 </body>
 
 </html>
