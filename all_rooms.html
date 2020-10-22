@@ -242,7 +242,7 @@
 													</a>
 												</div>
 											</div>
-											<div class="col-md-6 col-sm-6 col-6">
+											<!-- <div class="col-md-6 col-sm-6 col-6">
 												<div class="btn-group pull-right">
 													<a class="btn deepPink-bgcolor  btn-outline dropdown-toggle"
 														data-toggle="dropdown">Tools
@@ -263,11 +263,11 @@
 														</li>
 													</ul>
 												</div>
-											</div>
+											</div> -->
 										</div>
 										<div class="table-scrollable">
 											<table class="table table-hover table-checkable order-column full-width"
-												id="example4">
+												id="tableRoom">
 												<thead>
 													<tr>
 														<th class="center"> # </th>
@@ -276,13 +276,13 @@
 														<th class="center"> Makan </th>
 														<th class="center"> Kapasitas </th>
 														<th class="center"> Rent </th>
-														<th class="center"> Kosong/Isi </th>
-														<th class="center"> Hapus </th>
+														<!-- <th class="center"> Kosong/Isi </th>
+														<th class="center"> Hapus </th> -->
 													</tr>
 												</thead>
-												<tbody>
+												<tbody class="text-center">
 													<tr class="odd gradeX">			
-														<td class="center">{{no.kamar}}</td>
+														<!-- <td class="center">{{no.kamar}}</td>
 														<td class="center">{{tipe.kamar}}</td>
 														<td class="center">{{AC/NonAC}}</td>
 														<td class="center">{{makan}}</td>
@@ -306,7 +306,7 @@
 															<a class="btn btn-tbl-delete btn-xs">
 																<i class="fa fa-trash-o "></i>
 															</a>
-														</td>
+														</td> -->
 													</tr>
 												</tbody>
 											</table>
@@ -352,6 +352,134 @@
 	<!-- animation -->
 	<script src="assets/js/pages/ui/animations.js"></script>
 	<!-- end js include path -->
+	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
+	<script>
+		/* Get Types  */
+		const fetchRoomTypes= async () => {
+			let result;
+			try {
+				const apiUrlResponse = await fetch(`/api_url.txt`);
+				const apiUrl = await apiUrlResponse.text();
+				const apiKey = localStorage.getItem('apiKey')
+				const id = jwt_decode(apiKey).id
+				const roomTypesResponse = await fetch(`${apiUrl}/roomtypes`, {
+					headers: { 
+						authorization: apiKey,
+					}
+				}) 
+				if (roomTypesResponse.status !== 200) throw await response.text();
+				result = await roomTypesResponse.json();
+			} catch (e) {
+				console.error(e)
+			}
+			return result;
+		}
+
+		const fetchFoodAccomodation = async () => {
+			let result
+			try {
+				const apiUrlResponse = await fetch(`/api_url.txt`);
+				const apiUrl = await apiUrlResponse.text();
+				const apiKey = localStorage.getItem('apiKey')
+				const id = jwt_decode(apiKey).id
+ 				const foodTypesResponse = await fetch(`${apiUrl}/foodaccomodations`, {
+					headers: { 
+						authorization: apiKey,
+					}
+				}) 
+				if (foodTypesResponse.status !== 200) throw await response.text()
+				result = await foodTypesResponse.json()
+			} catch (e) {
+				console.error(e)
+			}
+			return result;
+		}
+
+		/* Display and Render */
+		const renderTable = (data) => {
+			const roomTypes = fetchRoomTypes().then(res => res);
+			const foodAccomodationTypes = fetchFoodAccomodation().then(res => res);
+			const table = document.querySelector('#tableRoom');
+
+			return Promise.all([roomTypes, foodAccomodationTypes]).then(([roomTypes, foodAccomodationTypes]) => {
+				console.log('RRR', roomTypes)
+				console.log('FF', foodAccomodationTypes)
+
+				data.map(data => {
+					let row = table.insertRow(-1);
+					row.insertCell(0).innerHTML = data.number;
+					roomTypes.map(type => {
+						if (data.roomTypeId === type.id) {
+							row.insertCell(1).innerHTML = type.name;
+						}
+					});
+					if (data.hasAC) {
+						row.insertCell(2).innerHTML = "Ya";
+					} else {
+						row.insertCell(2).innerHTML = "Tidak";
+					}
+					foodAccomodationTypes.map(type => {
+						if (data.foodAccomodationId === type.id) {
+							row.insertCell(3).innerHTML = type.name; 
+						}
+					})
+					row.insertCell(4).innerHTML = `${data.bedCapacity} orang`;
+					row.insertCell(5).innerHTML = data.price;
+				})
+
+			
+			});
+
+			// data.map((data, index) => {
+			// 	obj = {
+			// 		number: data.number,
+					
+			// 	}
+
+
+				// var row = table.insertRow(-1);
+				// row.insertCell(0).innerHTML = data.number;
+				// fetchRoomTypes().then(types => {
+				// 	types.map((type) => {
+				// 		if (data.roomTypeId === type.id) {
+				// 			row.insertCell(1).innerHTML = type.name;
+				// 		}
+				// 	});
+				// })
+
+				// if (data.hasAC) {
+				// 	row.insertCell(2).innerHTML = "Ya";
+				// } else {
+				// 	row.insertCell(2).innerHTML = "Tidak";
+				// }
+
+				// var foodAccomodation = row.insertCell(3).innerHTML = data.foodAccomodationId; // Replace with food accomodation name
+				// var Capacity = row.insertCell(4).innerHTML = `${data.bedCapacity} orang`;
+				// var price = row.insertCell(5).innerHTML = data.price;
+			// });
+			console.log('ob', roomTypes)
+		}
+
+		const fetchRoomList = async () => {
+		try {
+			const apiUrlResponse = await fetch(`/api_url.txt`)
+			const apiUrl = await apiUrlResponse.text()
+			const apiKey = localStorage.getItem('apiKey')
+			const userId = jwt_decode(apiKey).id
+			const response = await fetch(`${apiUrl}/rooms`, {
+				method: 'get',
+				headers: { authorization: localStorage.getItem('apiKey') },
+				});
+			if (response.status !== 200) throw await response.text()
+			responses = await response.json();
+			renderTable(responses);
+		} catch (e) {
+			console.error(e)
+		}
+	}
+
+	fetchRoomList();
+	</script>
 </body>
 
 </html>

@@ -580,72 +580,6 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 			else if (price === '')
 				alert('Harap isi harga!')
 			else {
-				// const roomData = {
-				// 	bedCapacity: bedCapacity,
-				// 	business: {
-				// 		address: "string",
-				// 		createdAt: "string",
-				// 		deletedAt: "string",
-				// 		description: "string",
-				// 		id: 0,
-				// 		name: "string",
-				// 		rooms: [
-				// 			null
-				// 		],
-				// 		serviceType: {
-				// 			createdAt: "string",
-				// 			deletedAt: "string",
-				// 			id: 0,
-				// 			name: "string",
-				// 			updatedAt: "string"
-				// 		},
-				// 		serviceTypeId: 0,
-				// 		updatedAt: "string"
-				// 	},
-				// 	businessId: 0,
-				// 	cancellationFee: {
-				// 		createdAt: "string",
-				// 		deletedAt: "string",
-				// 		id: 0,
-				// 		name: "string",
-				// 		updatedAt: "string"
-				// 	},
-				// 	cancellationFeeId: cancelation,
-				// 	createdAt: "string",
-				// 	deletedAt: "string",
-				// 	description: "string",
-				// 	foodAccomodation: {
-				// 		createdAt: "string",
-				// 		deletedAt: "string",
-				// 		id: 0,
-				// 		name: "string",
-				// 		updatedAt: "string"
-				// 	},
-				// 	foodAccomodationId: 0,
-				// 	guestType: {
-				// 		createdAt: "string",
-				// 		deletedAt: "string",
-				// 		id: 0,
-				// 		name: "string",
-				// 		updatedAt: "string"
-				// 	},
-				// 	guestTypeId: 0,
-				// 	hasAc: true,
-				// 	id: 0,
-				// 	name: "string",
-				// 	number: "string",
-				// 	price: 0,
-				// 	roomType: {
-				// 		createdAt: "string",
-				// 		deletedAt: "string",
-				// 		id: 0,
-				// 		name: "string",
-				// 		updatedAt: "string"
-				// 	},
-				// 	roomTypeId: 0,
-				// 	updatedAt: "string"
-				// }
-
 				const roomData = {
 					bedCapacity: bedCapacity,
 					business: null,//
@@ -660,7 +594,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 					hasAc: hasAC,
 					name: data.business.name,
 					number: roomNumber,
-					price: price,
+					price: parseInt(price),
 					roomType: null, //
 					roomTypeId: roomTypeId,
 				}
@@ -676,7 +610,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 						body: JSON.stringify(roomData)
 					})
 					if (response.status !== 200) throw await response.text()
-					window.location = '/'
+					//window.location = '/'
 				} catch (e) {
 					console.error(e)
 				}
@@ -688,25 +622,25 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 
 		
 		/* Image Upload */
-		const checkAndAddFile = (file) => {
-			if (file.size > megabytesLimit) {
-				alert(`Ukuran file melebihi batas! Max: 2MB, file yg diupload: ${Math.round(file.size/1024/1024)}MB`)
-			} else {
-				const reader = new FileReader()
-				reader.readAsDataURL(file)
-				reader.onload = () => {
-					const imgResult = reader.result
-					imgResultBase64 = imgResult;
-					document.querySelector('#file-image').src = imgResult;
-					document.querySelector('#file-image').classList.remove('hidden');
-					document.querySelector('#start').classList.add('hidden');
-				}
-				reader.onerror = () => {
-					document.querySelector('#file-image').classList.add('hidden');
-					document.querySelector('#start').classList.remove('hidden');
-				}
-			}
-		}
+		// const checkAndAddFile = (file) => {
+		// 	if (file.size > megabytesLimit) {
+		// 		alert(`Ukuran file melebihi batas! Max: 2MB, file yg diupload: ${Math.round(file.size/1024/1024)}MB`)
+		// 	} else {
+		// 		const reader = new FileReader()
+		// 		reader.readAsDataURL(file)
+		// 		reader.onload = () => {
+		// 			const imgResult = reader.result
+		// 			imgResultBase64 = imgResult;
+		// 			document.querySelector('#file-image').src = imgResult;
+		// 			document.querySelector('#file-image').classList.remove('hidden');
+		// 			document.querySelector('#start').classList.add('hidden');
+		// 		}
+		// 		reader.onerror = () => {
+		// 			document.querySelector('#file-image').classList.add('hidden');
+		// 			document.querySelector('#start').classList.remove('hidden');
+		// 		}
+		// 	}
+		// }
 
 		// To be used later
 		// document.querySelector('#file-upload').addEventListener('change', e => {
