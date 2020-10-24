@@ -160,7 +160,7 @@
 									<span class="selected"></span>
 								</a>
 							</li>
-							<li class="nav-item">
+							<!-- <li class="nav-item">
 								<a href="#" class="nav-link nav-toggle">
 									<i class="material-icons">business_center</i>
 									<span class="title">Booking</span>
@@ -178,7 +178,7 @@
 										</a>
 									</li>
 								</ul>
-							</li>
+							</li> -->
 							<li class="nav-item">
 								<a href="#" class="nav-link nav-toggle">
 									<i class="material-icons">vpn_key</i>
@@ -196,11 +196,11 @@
 											<span class="title">Lihat Kamar</span>
 										</a>
 									</li>
-									<li class="nav-item">
+									<!-- <li class="nav-item">
 										<a href="edit_room.html" class="nav-link ">
 											<span class="title">Edit Kamar</span>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</li>
 						</ul>
@@ -276,13 +276,13 @@
 														<th class="center"> Makan </th>
 														<th class="center"> Kapasitas </th>
 														<th class="center"> Rent </th>
-														<!-- <th class="center"> Kosong/Isi </th>
-														<th class="center"> Hapus </th> -->
+														<!-- <th class="center"> Kosong/Isi </th> -->
+														<th class="center"> Hapus </th>
 													</tr>
 												</thead>
 												<tbody class="text-center">
-													<tr class="odd gradeX">			
-														<!-- <td class="center">{{no.kamar}}</td>
+													<!-- <tr class="odd gradeX">			
+														<td class="center">{{no.kamar}}</td>
 														<td class="center">{{tipe.kamar}}</td>
 														<td class="center">{{AC/NonAC}}</td>
 														<td class="center">{{makan}}</td>
@@ -298,8 +298,8 @@
 																</span>
 															</span>
 															</label>
-														</td>
-														<td class="center">
+														</td> -->
+														<!-- <td class="center">
 															<a href="edit_room.html" class="btn btn-tbl-edit btn-xs">
 																<i class="fa fa-pencil"></i>
 															</a>
@@ -307,7 +307,7 @@
 																<i class="fa fa-trash-o "></i>
 															</a>
 														</td> -->
-													</tr>
+													<!-- </tr> -->
 												</tbody>
 											</table>
 										</div>
@@ -395,17 +395,33 @@
 			return result;
 		}
 
+		const deleteRoom = async (id) => {
+			try {
+			const apiUrlResponse = await fetch(`/api_url.txt`)
+			const apiUrl = await apiUrlResponse.text()
+			const apiKey = localStorage.getItem('apiKey')
+			const response = await fetch(`${apiUrl}/rooms/${id}`, 	{
+				method: 'DELETE',
+				headers: { authorization: localStorage.getItem('apiKey') },
+			});
+			if (response.status !== 200) throw await response.text();
+				let responses = await response.json();
+				console.log('res', responses)
+				document.location.reload();
+			} catch (e) {
+				console.error(e)
+			}
+		}
+
 		/* Display and Render */
 		const renderTable = (data) => {
 			const roomTypes = fetchRoomTypes().then(res => res);
 			const foodAccomodationTypes = fetchFoodAccomodation().then(res => res);
-			const table = document.querySelector('#tableRoom');
+			const table = document.querySelector('#tableRoom tbody');
 
 			return Promise.all([roomTypes, foodAccomodationTypes]).then(([roomTypes, foodAccomodationTypes]) => {
-				console.log('RRR', roomTypes)
-				console.log('FF', foodAccomodationTypes)
-
 				data.map(data => {
+					console.log('data', data)
 					let row = table.insertRow(-1);
 					row.insertCell(0).innerHTML = data.number;
 					roomTypes.map(type => {
@@ -425,39 +441,25 @@
 					})
 					row.insertCell(4).innerHTML = `${data.bedCapacity} orang`;
 					row.insertCell(5).innerHTML = data.price;
-				})
+					// row.insertCell(6).innerHTML = `<a class="btn btn-tbl-edit btn-lg edit" id=${data.id}><i class="fa fa-pencil"></i></a>`; // Edit
+					row.insertCell(6).innerHTML = `<a class="btn btn-tbl-delete btn-lg delete" id=${data.id}><i class="fa fa-trash-o "></i></a>`;
+				});
 
-			
+				
+				// /* Edit and Delete */
+				// document.querySelectorAll('.edit').forEach(el => el.addEventListener('click', e => {
+				// 	e.preventDefault();
+				// 	console.log('eee', el.getAttribute('id'));
+				// }))
+				document.querySelectorAll('.delete').forEach(el => el.addEventListener('click', e => {
+					e.preventDefault();
+					let id = el.getAttribute('id')
+					const confirmation = confirm("Apa anda yakin ingin menghapus room ini?")
+					if (confirmation) {
+						deleteRoom(id);
+					}
+				}));
 			});
-
-			// data.map((data, index) => {
-			// 	obj = {
-			// 		number: data.number,
-					
-			// 	}
-
-
-				// var row = table.insertRow(-1);
-				// row.insertCell(0).innerHTML = data.number;
-				// fetchRoomTypes().then(types => {
-				// 	types.map((type) => {
-				// 		if (data.roomTypeId === type.id) {
-				// 			row.insertCell(1).innerHTML = type.name;
-				// 		}
-				// 	});
-				// })
-
-				// if (data.hasAC) {
-				// 	row.insertCell(2).innerHTML = "Ya";
-				// } else {
-				// 	row.insertCell(2).innerHTML = "Tidak";
-				// }
-
-				// var foodAccomodation = row.insertCell(3).innerHTML = data.foodAccomodationId; // Replace with food accomodation name
-				// var Capacity = row.insertCell(4).innerHTML = `${data.bedCapacity} orang`;
-				// var price = row.insertCell(5).innerHTML = data.price;
-			// });
-			console.log('ob', roomTypes)
 		}
 
 		const fetchRoomList = async () => {
@@ -465,7 +467,6 @@
 			const apiUrlResponse = await fetch(`/api_url.txt`)
 			const apiUrl = await apiUrlResponse.text()
 			const apiKey = localStorage.getItem('apiKey')
-			const userId = jwt_decode(apiKey).id
 			const response = await fetch(`${apiUrl}/rooms`, {
 				method: 'get',
 				headers: { authorization: localStorage.getItem('apiKey') },
