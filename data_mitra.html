@@ -59,7 +59,7 @@
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
 								data-close-others="true">
 								<i class="fa fa-bell-o"></i>
-								<span class="badge headerBadgeColor1"> {{Jumlah Notif}} </span>
+								<!-- <span class="badge headerBadgeColor1"> {{Jumlah Notif}} </span> -->
 							</a>
 							<ul class="dropdown-menu animated swing">
 								<li class="external">
@@ -429,6 +429,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<!-- end js include path -->
 	<script>
+		const apiKey = localStorage.getItem('apiKey')
+
+		if (!apiKey) {
+			window.location = '/'
+		}
+
 		let megabytesLimit = 2 * 1024 * 1024
 		let ktpImageBas64 = ''
 		let userInfo = null
@@ -504,7 +510,7 @@
 				userInfo = await userInfoResponse.json()
 				console.log(userInfo)
 
-				document.querySelector('#username-div').innerText = userInfo.name
+				document.querySelector('#username-div').innerText = userInfo.email
 			} catch (e) {
 				console.error(e);
 				document.querySelector('#username-div').innerHTML = ``

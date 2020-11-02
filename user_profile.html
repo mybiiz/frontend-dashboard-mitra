@@ -55,7 +55,7 @@
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
 								data-close-others="true">
 								<i class="fa fa-bell-o"></i>
-								<span class="badge headerBadgeColor1"> {{Jumlah Notif}} </span>
+								<!-- <span class="badge headerBadgeColor1"> {{Jumlah Notif}} </span> -->
 							</a>
 							<ul class="dropdown-menu animated swing">
 								<li class="external">
@@ -84,7 +84,7 @@
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
 								data-close-others="true">
 								<img alt="" class="img-circle " src="../../" /> <!--foto user-->
-								<span class="username username-hide-on-mobile" id="username"> {{Username}} </span>
+								<span class="username username-hide-on-mobile" id="username"></span>
 								<i class="fa fa-angle-down"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-default animated jello">
@@ -94,7 +94,7 @@
 								</li>
 								<li class="divider"> </li>
 								<li>
-									<a href="login.html">
+									<a id="logout-btn">
 										<i class="icon-logout"></i> Log Out </a>
 								</li>
 							</ul>
@@ -315,6 +315,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<!-- end js include path -->
 	<script>
+		const apiKey = localStorage.getItem('apiKey')
+
+		if (!apiKey) {
+			window.location = '/'
+		}
+
+		document.querySelector('#logout-btn').addEventListener('click', e => {
+			localStorage.removeItem("apiKey")
+			window.location = '/'
+		})
+
 		const renderProfile = (data, selector) => {
 			var node = document.querySelector(selector);
 			if (!node) return;
@@ -338,7 +349,7 @@
 				const profile = res.partners[0];
 				id = profile.id
 				console.log(profile)
-				renderProfile(profile.user.username, '#username');
+				renderProfile(res.email, '#username');
 				renderProfile(profile.firstName, '#name');
 				renderProfile(profile.business.name, '#businessName');
 				renderProfile(profile.business.address, '#businessAddress');
