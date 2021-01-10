@@ -188,7 +188,7 @@
 								</a>
 								<ul class="sub-menu">
 									<li class="nav-item">
-										<a href="add_room.html" class="nav-link ">
+										<a href="add_room.html?room_id=new" class="nav-link ">
 											<span class="title">Tambah Kamar</span>
 										</a>
 									</li>
@@ -238,7 +238,7 @@
 										<div class="row p-b-20">
 											<div class="col-md-6 col-sm-6 col-6">
 												<div class="btn-group">
-													<a href="add_room.html" id="addRow" class="btn btn-info">
+													<a href="add_room.html?room_id=new" id="addRow" class="btn btn-info">
 														Add New <i class="fa fa-plus"></i>
 													</a>
 												</div>
@@ -357,7 +357,9 @@
 	<!-- end js include path -->
 	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<script>
-		const apiKey = localStorage.getItem('apiKey')
+    
+    
+    const apiKey = localStorage.getItem('apiKey')
 		
 		if (!apiKey) {
 			window.location = '/'
@@ -444,6 +446,9 @@
 				data.map(data => {
 					console.log('data', data)
 					let row = table.insertRow(-1);
+					row.addEventListener('click', e => {
+						window.location.assign(`/add_room.html?room_id=${data.id}`)	
+					} )
 					row.insertCell(0).innerHTML = data.number;
 					// roomTypes.map(type => {
 					// 	if (data.roomTypeId === type.id) {

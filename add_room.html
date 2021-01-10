@@ -27,7 +27,9 @@
 	<!-- dropzone -->
 	<link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet" media="screen">
 	<!-- favicon -->
-	<link rel="shortcut icon" href="assets/img/favicon.ico" />
+  <link rel="shortcut icon" href="assets/img/favicon.ico" />
+  <!-- Compressor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.0.7/compressor.min.js" integrity="sha512-ZNlHFR9FBdeIlhwh040g5JmmYj7DQOwkqb9Y+DBJ1MaTzRMxKZkfHWkQU/dazDn9XRriajfh7ZGFksBKeUCsCg==" crossorigin="anonymous"></script>
 </head>
 <!-- END HEAD -->
 
@@ -185,7 +187,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 								</a>
 								<ul class="sub-menu">
 									<li class="nav-item">
-										<a href="add_room.html" class="nav-link ">
+										<a href="add_room.html?room_id=new" class="nav-link ">
 											<span class="title">Tambah Kamar</span>
 										</a>
 									</li>
@@ -242,8 +244,8 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 										<div class="col-lg-6 p-t-20">
 											<div
 												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-												<label for="roomType" class="mdl-textfield__label">Tipe Kamar</label>
-												<select class="mdl-textfield__input" id="roomType">
+                        <label for="roomType" class="mdl-textfield__label">Tipe Kamar (Selected: <span id="selected-room-type"></span>)</label>
+												<select class="mdl-textfield__input" id="roomType" >
 												</select>
 											</div>
 										</div>
@@ -255,7 +257,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 												<label for="hasAC" class="pull-right margin-0">
 													<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
 												</label>
-												<label for="hasAC" class="mdl-textfield__label">AC/Non AC</label>
+												<label for="hasAC" class="mdl-textfield__label">AC/Non AC (Selected: <span id="selected-ac-non-ac"></span>)</label>
 												<ul data-mdl-for="hasAC"
 													class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
 													<li class="mdl-menu__item" data-val=true>AC</li>
@@ -266,7 +268,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 										<div class="col-lg-6 p-t-20">
 											<div
 												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-												<label for="foodAccomodationTypes" class="mdl-textfield__label">Makan</label>
+												<label for="foodAccomodationTypes" class="mdl-textfield__label">Makan (Selected: <span id="selected-food-type"></span>)</label>
 												<select class="mdl-textfield__input" id="foodAccomodationTypes">
 												</select>
 											</div>
@@ -274,7 +276,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 										<div class="col-lg-6 p-t-20">
 											<div
 												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-												<label for="cancellationFee" class="mdl-textfield__label">Biaya Pembatalan</label>
+												<label for="cancellationFee" class="mdl-textfield__label">Biaya Pembatalan (Selected: <span id="selected-cancellation-fee"></span>)</label>
 												<select class="mdl-textfield__input" id="cancellationFee">
 												</select>
 											</div>
@@ -287,7 +289,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 												<label for="bedCapacity" class="pull-right margin-0">
 													<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
 												</label>
-												<label for="bedCapacity" class="mdl-textfield__label">Bed Capacity</label>
+												<label for="bedCapacity" class="mdl-textfield__label">Bed Capacity (Selected: <span id="selected-bed-capacity"></span>)</label>
 												<ul data-mdl-for="bedCapacity" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
 													<li class="mdl-menu__item" data-val="1">1</li>
 													<li class="mdl-menu__item" data-val="2">2</li>
@@ -299,7 +301,7 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 										<div class="col-lg-6 p-t-20">
 											<div
 												class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-												<label for="guestType" class="mdl-textfield__label">Tipe Tamu</label>
+												<label for="guestType" class="mdl-textfield__label">Tipe Tamu (Selected: <span id="selected-guest-type"></span>)</label>
 												<select class="mdl-textfield__input" id="guestType">
 												</select>
 											</div>
@@ -315,14 +317,24 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 										</div>
 										<div class="col-lg-12 p-t-20">
 											<label class="control-label col-md-3">Upload Foto Kamar</label>
-											<form id="id_dropzone" class="dropzone">
+                      
+                      <div id='drop-room-img' class="d-flex justify-content-center align-items-center p-3 border border-secondary">
+                        Seret gambar ke sini atau klik di sini untuk upload file
+                      </div>
+
+                      <div id='room-img-preview'>
+                        
+                      </div>
+
+                      <input type="file" id='room-img-input' style="display:none" />
+                      <!-- <form id="id_dropzone" class="dropzone">
 												<div class="dz-message">
 													<div class="dropIcon">
 														<i class="material-icons">cloud_upload</i>
 													</div>
 													<h3>Seret gambar ke sini atau klik untuk menguanggah.</h3>
 												</div>
-											</form>
+											</form> -->
 										</div>
 										<div class="col-lg-12 p-t-20">
 											<div class="mdl-textfield mdl-js-textfield txt-full-width">
@@ -379,338 +391,529 @@ class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md hea
 	<!-- end js include path -->
 	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@2.2.0/build/jwt-decode.min.js"></script>
 	<script>
-		const apiKey = localStorage.getItem('apiKey')
-		
-		if (!apiKey) {
-			window.location = '/'
-		}
 
-		document.querySelector('#logout-btn').addEventListener('click', e => {
-			localStorage.removeItem('apiKey')
-			window.location = '/'
-		})
+    
 
-		document.querySelector('#logout-icon').addEventListener('click', e => {
-			localStorage.removeItem('apiKey')
-			window.location = '/'
-		})
-
-		/* Logout and Cancel Button */
-		document.querySelector('#logout-btn').addEventListener('click', e => {
-			localStorage.removeItem("apiKey")
-			window.location = '/'
-		});
-		
-		document.querySelector('#logout-icon').addEventListener('click', e => {
-			localStorage.removeItem("apiKey")
-			window.location = '/'
-		});
-		
-		document.querySelector('#cancel-btn').addEventListener('click', () => window.history.back());
-
-		let data;
-		const fetchBusinessData = async () => {
-			try {
-				const apiUrlResponse = await fetch(`/api_url.txt`)
-				const apiUrl = await apiUrlResponse.text()
-				const apiKey = localStorage.getItem('apiKey')
-				const userId = jwt_decode(apiKey).id
-				const response = await fetch(`${apiUrl}/users/${userId}/view`, {
-					method: 'get',
-					headers: { authorization: localStorage.getItem('apiKey') },
-					});
-				if (response.status !== 200) throw await response.text()
-				res = await response.json();
-				data = res.partners[0];
-			} catch (e) {
-				console.error(e)
-			}
-		}
-		fetchBusinessData();
-
-		/* Get Types  */
-		const fetchRoomTypes= async () => {
-			try {
-				const apiUrlResponse = await fetch(`/api_url.txt`);
-				const apiUrl = await apiUrlResponse.text();
-				const apiKey = localStorage.getItem('apiKey')
-				const id = jwt_decode(apiKey).id
- 				const roomTypesResponse = await fetch(`${apiUrl}/roomtypes`, {
-					headers: { 
-						authorization: apiKey,
-					}
-				}) 
-				if (roomTypesResponse.status !== 200) throw await response.text()
-				roomTypes = await roomTypesResponse.json()
-
-				const roomTypesMapped = roomTypes.map(roomType => `
-					<option value="${roomType.id}">${roomType.name}</option>					
-				`).join('')
-
-				document.querySelector(`#roomType`).innerHTML = `
-          <option value="0"></option>
-          ${roomTypesMapped}
-        `
-			} catch (e) {
-				console.error(e)
-			}
-		}
-
-		const fetchFoodAccomodation = async () => {
-			try {
-				const apiUrlResponse = await fetch(`/api_url.txt`);
-				const apiUrl = await apiUrlResponse.text();
-				const apiKey = localStorage.getItem('apiKey')
-				const id = jwt_decode(apiKey).id
- 				const foodTypesResponse = await fetch(`${apiUrl}/foodaccomodations`, {
-					headers: { 
-						authorization: apiKey,
-					}
-				}) 
-				if (foodTypesResponse.status !== 200) throw await response.text()
-				foodTypes = await foodTypesResponse.json()
-
-				const foodTypesMapped = foodTypes.map(foodType => `
-					<option value="${foodType.id}">${foodType.name}</option>					
-				`).join('')
-
-				document.querySelector(`#foodAccomodationTypes`).innerHTML = `
-          <option value="0"></option>
-          ${foodTypesMapped}
-        `
-			} catch (e) {
-				console.error(e)
-			}
-		}
-
-		const fetchCancelationFees = async () => {
-			try {
-				const apiUrlResponse = await fetch(`/api_url.txt`);
-				const apiUrl = await apiUrlResponse.text();
-				const apiKey = localStorage.getItem('apiKey')
-				const id = jwt_decode(apiKey).id
- 				const cancellationFeeResponse = await fetch(`${apiUrl}/cancellationfees`, {
-					headers: { 
-						authorization: apiKey,
-					}
-				}) 
-				if (cancellationFeeResponse.status !== 200) throw await response.text()
-				cancellationFee = await cancellationFeeResponse.json()
-
-				const cancellationFeeMapped = cancellationFee.map(fee => `
-					<option value="${fee.id}">${fee.name}</option>					
-				`).join('')
-
-				document.querySelector(`#cancellationFee`).innerHTML = `
-          <option value="0"></option>
-          ${cancellationFeeMapped}
-        `
-			} catch (e) {
-				console.error(e)
-			}
-		}
-
-		const fetchGuestType = async () => {
-			try {
-				const apiUrlResponse = await fetch(`/api_url.txt`);
-				const apiUrl = await apiUrlResponse.text();
-				const apiKey = localStorage.getItem('apiKey')
-				const id = jwt_decode(apiKey).id
- 				const guestTypeResponse = await fetch(`${apiUrl}/guesttypes`, {
-					headers: { 
-						authorization: apiKey,
-					}
-				}) 
-				if (guestTypeResponse.status !== 200) throw await response.text()
-				guestType = await guestTypeResponse.json()
-
-				const guestTypeMapped = guestType.map(type => `
-					<option value="${type.id}">${type.name}</option>					
-				`).join('')
-
-				document.querySelector(`#guestType`).innerHTML = `
-          <option value="0"></option>
-          ${guestTypeMapped}
-        `
-			} catch (e) {
-				console.error(e)
-			}
-		}
-
-		fetchRoomTypes();
-		fetchFoodAccomodation();
-		fetchCancelationFees();
-		fetchGuestType();
-
-		/* Variables */
-		let megabytesLimit = 2 * 1024 * 1024;
+    /* Variables */
+    let data;
+    
+    let megabytesLimit = 2 * 1024 * 1024;
+    let id = undefined;
 		let roomTypeId = 0;
-		let hasAC = null;
+		let hasAC = false;
 		let foodTypeId = 0;
 		let cancellationFeeId;
 		let bedCapacity = '';
-		let guestTypeId = 0;
+    let guestTypeId = 0;
+    let createdAt = undefined;
+    let updatedAt = undefined;
+    
+    let roomImageViews = []
 
-		/* Form On Change Functions */
-		document.querySelector('#roomType').addEventListener('change', e => {
-      roomTypeId = parseInt(e.target.value)
-    });
-		document.querySelector('#hasAC').addEventListener('change', e => {
-			if (e.target.value == 'AC') {
-				hasAC = true;
-			} else {
-				hasAC = false;
-			}
-    });
-		document.querySelector('#foodAccomodationTypes').addEventListener('change', e => {
-      foodTypeId = parseInt(e.target.value)
-    });
-		document.querySelector('#cancellationFee').addEventListener('change', e => {
-      cancellationFeeId = parseInt(e.target.value)
-    });
-		document.querySelector('#bedCapacity').addEventListener('change', e => {
-			bedCapacity = parseInt(e.target.value);
-		});
-		document.querySelector('#guestType').addEventListener('change', e => {
-      guestTypeId = parseInt(e.target.value)
-    });
+    let roomTypes = []
+    let foodTypes = []
+    let cancellationFees = []
+    let guestTypes = []
+
+    let initialRoomImage = {
+      id: undefined,
+      createdAt: null,
+      updatedAt: null,
+      createdAt: null,
+      roomId: null,
+      dataPrefix: ''
+    }
+
+    const execute = async () => {
+      const roomId = new URLSearchParams (window.location.search).get('room_id')
+      console.log('Room ID:', roomId)
+
+      const apiKey = localStorage.getItem('apiKey')
+      
+      if (!apiKey) {
+        window.location = '/'
+      }
+
+      document.querySelector('#logout-btn').addEventListener('click', e => {
+        localStorage.removeItem('apiKey')
+        window.location = '/'
+      })
+
+      document.querySelector('#logout-icon').addEventListener('click', e => {
+        localStorage.removeItem('apiKey')
+        window.location = '/'
+      })
+
+      /* Logout and Cancel Button */
+      document.querySelector('#logout-btn').addEventListener('click', e => {
+        localStorage.removeItem("apiKey")
+        window.location = '/'
+      });
+      
+      document.querySelector('#logout-icon').addEventListener('click', e => {
+        localStorage.removeItem("apiKey")
+        window.location = '/'
+      });
+      
+      document.querySelector('#cancel-btn').addEventListener('click', () => window.history.back());
+  
+      
+
+      const fetchBusinessData = async () => {
+        try {
+          const apiUrlResponse = await fetch(`/api_url.txt`)
+          const apiUrl = await apiUrlResponse.text()
+          const apiKey = localStorage.getItem('apiKey')
+          const userId = jwt_decode(apiKey).id
+          const response = await fetch(`${apiUrl}/users/${userId}/view`, {
+            method: 'get',
+            headers: { authorization: localStorage.getItem('apiKey') },
+          });
+          if (response.status !== 200) throw await response.text()
+          res = await response.json();
+          data = res.partners[0];
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      /* Get Types  */
+      const fetchRoomTypes= async () => {
+        try {
+          const apiUrlResponse = await fetch(`/api_url.txt`);
+          const apiUrl = await apiUrlResponse.text();
+          const apiKey = localStorage.getItem('apiKey')
+          const id = jwt_decode(apiKey).id
+          const roomTypesResponse = await fetch(`${apiUrl}/roomtypes`, {
+            headers: { 
+              authorization: apiKey,
+            }
+          }) 
+          if (roomTypesResponse.status !== 200) throw await response.text()
+          roomTypes = await roomTypesResponse.json()
+
+          const roomTypesMapped = roomTypes.map(roomType => `
+            <option value="${roomType.id}">${roomType.name}</option>					
+          `).join('')
+
+          document.querySelector(`#roomType`).innerHTML = `
+            <option value="0"></option>
+            ${roomTypesMapped}
+          `
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      const fetchFoodAccomodation = async () => {
+        try {
+          const apiUrlResponse = await fetch(`/api_url.txt`);
+          const apiUrl = await apiUrlResponse.text();
+          const apiKey = localStorage.getItem('apiKey')
+          const id = jwt_decode(apiKey).id
+          const foodTypesResponse = await fetch(`${apiUrl}/foodaccomodations`, {
+            headers: { 
+              authorization: apiKey,
+            }
+          }) 
+          if (foodTypesResponse.status !== 200) throw await response.text()
+          foodTypes = await foodTypesResponse.json()
+
+          const foodTypesMapped = foodTypes.map(foodType => `
+            <option value="${foodType.id}">${foodType.name}</option>					
+          `).join('')
+
+          document.querySelector(`#foodAccomodationTypes`).innerHTML = `
+            <option value="0"></option>
+            ${foodTypesMapped}
+          `
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      const fetchCancelationFees = async () => {
+        try {
+          const apiUrlResponse = await fetch(`/api_url.txt`);
+          const apiUrl = await apiUrlResponse.text();
+          const apiKey = localStorage.getItem('apiKey')
+          const id = jwt_decode(apiKey).id
+          const cancellationFeeResponse = await fetch(`${apiUrl}/cancellationfees`, {
+            headers: { 
+              authorization: apiKey,
+            }
+          }) 
+          if (cancellationFeeResponse.status !== 200) throw await response.text()
+          cancellationFees = await cancellationFeeResponse.json()
+
+          const cancellationFeeMapped = cancellationFees.map(fee => `
+            <option value="${fee.id}">${fee.name}</option>					
+          `).join('')
+
+          document.querySelector(`#cancellationFee`).innerHTML = `
+            <option value="0"></option>
+            ${cancellationFeeMapped}
+          `
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      const fetchGuestType = async () => {
+        try {
+          const apiUrlResponse = await fetch(`/api_url.txt`);
+          const apiUrl = await apiUrlResponse.text();
+          const apiKey = localStorage.getItem('apiKey')
+          const id = jwt_decode(apiKey).id
+          const guestTypeResponse = await fetch(`${apiUrl}/guesttypes`, {
+            headers: { 
+              authorization: apiKey,
+            }
+          }) 
+          if (guestTypeResponse.status !== 200) throw await response.text()
+          guestTypes = await guestTypeResponse.json()
+
+          const guestTypeMapped = guestTypes.map(type => `
+            <option value="${type.id}">${type.name}</option>					
+          `).join('')
+
+          document.querySelector(`#guestType`).innerHTML = `
+            <option value="0"></option>
+            ${guestTypeMapped}
+          `
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      const fetchRoom = async () => {
+        try {
+          const apiUrlResponse = await fetch(`/api_url.txt`)
+          const apiUrl = await apiUrlResponse.text()
+          const apiKey = localStorage.getItem('apiKey')
+          const userId = jwt_decode(apiKey).id
+          const response = await fetch(`${apiUrl}/rooms/${roomId}/view`, {
+            method: 'get',
+            headers: { authorization: localStorage.getItem('apiKey') },
+          });
+          if (response.status !== 200) throw await response.text()
+          const res = await response.json();
+          
+          console.log("Room data:", res)
+          console.log("Room types:", roomTypes, res.room.roomTypeId)
+          console.log("Room image views:", res.roomImageViews)
+
+          id = res.room.id;
+
+          document.querySelector('#roomNumber').value = res.room.number
+
+          roomTypeId = res.room.roomTypeId
+          document.querySelector('#selected-room-type').innerHTML = roomTypes.find(roomType => roomType.id === roomTypeId)?.name
+          
+          hasAc = res.room.hasAc
+          
+          if (hasAc) {
+            document.querySelector('#selected-ac-non-ac').innerHTML = 'AC'
+          } else {
+            document.querySelector('#selected-ac-non-ac').innerHTML = 'Non AC'
+          }
+          
+          foodTypeId = res.room.foodAccomodationId
+          document.querySelector('#selected-food-type').innerHTML = foodTypes.find(foodType => foodType.id === foodTypeId)?.name
+          
+          guestTypeId = res.room.guestTypeId
+          document.querySelector('#selected-guest-type').innerHTML = guestTypes.find(guestType => guestType.id === guestTypeId)?.name
+
+          cancellationFeeId = res.room.cancellationFeeId
+          document.querySelector('#selected-cancellation-fee').innerHTML = cancellationFees.find(cancellationFee => cancellationFee.id === cancellationFeeId)?.name
+          
+          bedCapacity = res.room.bedCapacity
+          document.querySelector('#selected-bed-capacity').innerHTML = bedCapacity
+
+          document.querySelector('#price').value = res.room.price
+          document.querySelector('#description').value = res.room.description
+
+          createdAt = res.room.createdAt
+          updatedAt = res.room.updatedAt
+          
+          roomImageViews = res.roomImageViews
+
+          renderRoomImages()
+          // data = res.partners[0];
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      const fetchUser = async () => {
+        try {
+          const apiUrlResponse = await fetch(`/api_url.txt`)
+          const apiUrl = await apiUrlResponse.text()
+          const apiKey = localStorage.getItem('apiKey')
+          const id = jwt_decode(apiKey).id
+          const response = await fetch(`${apiUrl}/users/${id}/view`, {
+            method: 'get',
+            headers: { authorization: localStorage.getItem('apiKey') },
+          });
+          if (response.status !== 200) throw await response.text()
+          const user = await response.json();
+          const partner = user.partners[0];
+
+          if (partner) {
+            document.querySelector('#user-name').innerText = `${partner.firstName} ${partner.lastName}`;
+            document.querySelector('#username').innerText = user.email;
+          }
+          
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      await Promise.all([
+        fetchRoomTypes(),
+        fetchFoodAccomodation(),
+        fetchCancelationFees(),
+        fetchGuestType(),
+        fetchBusinessData(),
+        fetchUser()
+      ])
+
+      if (roomId && !isNaN(roomId)) {
+        fetchRoom();  
+      }
+
+      /* Form On Change Functions */
+      document.querySelector('#roomType').addEventListener('change', e => {
+        roomTypeId = parseInt(e.target.value)
+
+        console.log("Selected room id:", e.target.value, typeof e.target.value)
+
+        const foundRoomType = roomTypes.find(roomType => 
+            roomType.id.toString() === e.target.value
+          )
+
+        console.log('Found room tuype', foundRoomType)
+
+        document.querySelector('#selected-room-type').innerHTML = foundRoomType.name
+          
+      });
+      document.querySelector('#hasAC').addEventListener('change', e => {
+        if (e.target.value == 'AC') {
+          hasAC = true;
+          document.querySelector('#selected-ac-non-ac').innerHTML = 'AC'
+        } else {
+          hasAC = false;
+          document.querySelector('#selected-ac-non-ac').innerHTML = 'Non AC'
+        }
+      });
+      document.querySelector('#foodAccomodationTypes').addEventListener('change', e => {
+        foodTypeId = parseInt(e.target.value)
+        document.querySelector('#selected-food-type').innerHTML = foodTypes.find(foodType => foodType.id.toString() === e.target.value.toString())?.name
+      });
+      document.querySelector('#cancellationFee').addEventListener('change', e => {
+        cancellationFeeId = parseInt(e.target.value)
+        document.querySelector('#selected-cancellation-fee').innerHTML = cancellationFees.find(cancellationFee => cancellationFee.id.toString() === e.target.value.toString())?.name
+      });
+      document.querySelector('#bedCapacity').addEventListener('change', e => {
+        bedCapacity = parseInt(e.target.value);
+        document.querySelector('#selected-bed-capacity').innerHTML = e.target.value.toString( )
+      });
+      document.querySelector('#guestType').addEventListener('change', e => {
+        guestTypeId = parseInt(e.target.value)
+        document.querySelector('#selected-guest-type').innerHTML = guestTypes.find(guestType => guestType.id.toString() === e.target.value.toString())?.name
+      });
+
+      document.querySelector('#drop-room-img').addEventListener('click', e => {
+        document.querySelector('#room-img-input').click()
+      });
+       
+      const renderRoomImages = () => {
+        document.querySelector('#room-img-preview').innerHTML = roomImageViews.map(roomImageView => `
+          <div class="d-flex justify-content-center my-2 border border-secondary">
+            <img src="${roomImageView.imageBase64}" />  
+          </div>
+        `).join('')
+      }
+    
+      const processFile = (file) => {
+        console.log(file)
+
+        const compressor = new Compressor(file, {
+          quality: 0.5,
+          maxWidth: 300,
+          success: (res) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(res)
+            reader.onload = () => {
+              const dataPrefix = reader.result.split(';base64,')[0]
+
+              roomImageViews.push({ 
+                roomImage: { ...initialRoomImage, dataPrefix: dataPrefix },
+                imageBase64: reader.result
+              })
+
+              renderRoomImages()
+            }
+
+            reader.onerror = e => {
+              console.error(e)
+            }
+          },
+          error: (err) => {
+            console.error(err)
+          }
+        })
+      }
+
+      document.querySelector('#room-img-input').addEventListener('input', e => {
+        e.preventDefault()
+        processFile(e.target.files[0])
+      });
+
+      document.querySelector('#drop-room-img').addEventListener('drop', e => {
+        e.preventDefault()
+        document.querySelector('#drop-room-img').className = 'd-flex justify-content-center align-items-center p-3 border border-secondary'
+        document.querySelector('#room-img-input').click()
+        processFile(e.dataTransfer.items[0].getAsFile())
+      });
+
+      document.querySelector('#drop-room-img').addEventListener('dragover', e => {
+        e.preventDefault()
+        document.querySelector('#drop-room-img').className = 'd-flex justify-content-center align-items-center p-3 border border-secondary bg-secondary'
+      });
+
+      document.querySelector('#drop-room-img').addEventListener('dragleave', e => {
+        e.preventDefault()
+        document.querySelector('#drop-room-img').className = 'd-flex justify-content-center align-items-center p-3 border border-secondary'
+      });
+      
+      /* Post Form Add Room */
+      document.querySelector('#submitBtn').addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const roomNumber = document.querySelector('#roomNumber').value;
+        const price = document.querySelector('#price').value;
+        const description = document.querySelector('#description').value;
+        
+        // Validation
+        if (roomNumber === '')
+          alert('Harap isi nomor kamar!')
+        else if (roomTypeId === 0)
+          alert('Harap pilih tipe kamar!')
+        else if (hasAC === null)
+          alert('Harap pilih AC/Non AC!')
+        else if (foodTypeId === 0)
+          alert('Harap pilih fasilitas makanan!')
+        else if (cancellationFeeId === 0)
+          alert('Harap pilih biaya pembatalan!')
+        else if (bedCapacity === '')
+          alert('Harap pilih kapasitas tempat tidur!')
+        else if (guestTypeId === 0)
+          alert('Harap isi tipe tamu!')
+        else if (price === '')
+          alert('Harap isi harga!')
+        else {
+          const roomData = {
+            id: id,
+            bedCapacity: bedCapacity,
+            business: null,//
+            businessId: data.business.id,
+            cancellationFee: null,//
+            cancellationFeeId: cancellationFeeId,
+            description: description,
+            foodAccomodation: null,//
+            foodAccomodationId: foodTypeId,
+            guestType: null,//
+            guestTypeId: guestTypeId,
+            hasAc: hasAC,
+            name: data.business.name,
+            number: roomNumber,
+            price: parseInt(price),
+            roomType: null, //
+            roomTypeId: roomTypeId,
+            createdAt: createdAt,
+            updatedAt: updatedAt
+          }
+
+          console.log('room image views', roomImageViews)
+
+          const roomPostBody = {
+            room: roomData,
+            roomImageViews: roomImageViews,
+            roomImageDeleteIds: []
+          }
+
+          console.log('ROOMDATA', roomPostBody)
+
+          try {
+            const apiUrlResponse = await fetch(`/api_url.txt`);
+            const apiUrl = await apiUrlResponse.text();
+            const response = await fetch(`${apiUrl}/rooms/save`, {
+              method: 'post',
+              headers: { authorization: localStorage.getItem('apiKey') },
+              body: JSON.stringify(roomPostBody)
+            })
+            if (response.status !== 200) throw await response.text()
+            //window.location = '/'
+          } catch (e) {
+            console.error(e)
+          }
+
+          console.log('ROOMDATA', roomData)
+          alert('Kamar berhasil dibuat!');
+          window.location.href = 'all_rooms.html';
+        }
+      });
+
+      
+      
+      /* Image Upload */
+      // const checkAndAddFile = (file) => {
+      // 	if (file.size > megabytesLimit) {
+      // 		alert(`Ukuran file melebihi batas! Max: 2MB, file yg diupload: ${Math.round(file.size/1024/1024)}MB`)
+      // 	} else {
+      // 		const reader = new FileReader()
+      // 		reader.readAsDataURL(file)
+      // 		reader.onload = () => {
+      // 			const imgResult = reader.result
+      // 			imgResultBase64 = imgResult;
+      // 			document.querySelector('#file-image').src = imgResult;
+      // 			document.querySelector('#file-image').classList.remove('hidden');
+      // 			document.querySelector('#start').classList.add('hidden');
+      // 		}
+      // 		reader.onerror = () => {
+      // 			document.querySelector('#file-image').classList.add('hidden');
+      // 			document.querySelector('#start').classList.remove('hidden');
+      // 		}
+      // 	}
+      // }
+
+      // To be used later
+      // document.querySelector('#file-upload').addEventListener('change', e => {
+      // 	e.preventDefault()
+      // 	checkAndAddFile(e.target.files[0])
+      // });
+
+      // document.querySelector('#clear-img-btn').addEventListener('click', e => {
+      // 	e.preventDefault()
+      // 	imgResultBase64 = ''
+      // 	document.querySelector('#file-image').src = '';
+      // 	document.querySelector('#file-image').classList.add('hidden');
+      // 	document.querySelector('#start').classList.remove('hidden');
+      // })
+
+      // const dropHandler = e => {
+      // 	e.preventDefault();
+      // 	checkAndAddFile(e.dataTransfer.files[0])
+      // }
+
+      // const dragOverHandler = e => {
+      // 	e.preventDefault();
+      // }
+      }
+
+      execute()
 		
-		/* Post Form Add Room */
-		document.querySelector('#submitBtn').addEventListener('click', async (e) => {
-			e.preventDefault();
-
-			const roomNumber = document.querySelector('#roomNumber').value;
-			const price = document.querySelector('#price').value;
-			const description = document.querySelector('#description').value;
-			
-			// Validation
-			if (roomNumber === '')
-				alert('Harap isi nomor kamar!')
-			else if (roomTypeId === 0)
-				alert('Harap pilih tipe kamar!')
-			else if (hasAC === null)
-				alert('Harap pilih AC/Non AC!')
-			else if (foodTypeId === 0)
-				alert('Harap pilih fasilitas makanan!')
-			else if (cancellationFeeId === 0)
-				alert('Harap pilih biaya pembatalan!')
-			else if (bedCapacity === '')
-				alert('Harap pilih kapasitas tempat tidur!')
-			else if (guestTypeId === 0)
-				alert('Harap isi tipe tamu!')
-			else if (price === '')
-				alert('Harap isi harga!')
-			else {
-				const roomData = {
-					bedCapacity: bedCapacity,
-					business: null,//
-					businessId: data.business.id,
-					cancellationFee: null,//
-					cancellationFeeId: cancellationFeeId,
-					description: description,
-					foodAccomodation: null,//
-					foodAccomodationId: foodTypeId,
-					guestType: null,//
-					guestTypeId: guestTypeId,
-					hasAc: hasAC,
-					name: data.business.name,
-					number: roomNumber,
-					price: parseInt(price),
-					roomType: null, //
-					roomTypeId: roomTypeId,
-				}
-
-				console.log('ROOMDATA', roomData)
-
-				try {
-					const apiUrlResponse = await fetch(`/api_url.txt`);
-					const apiUrl = await apiUrlResponse.text();
-					const response = await fetch(`${apiUrl}/rooms`, {
-						method: 'post',
-						headers: { authorization: localStorage.getItem('apiKey') },
-						body: JSON.stringify(roomData)
-					})
-					if (response.status !== 200) throw await response.text()
-					//window.location = '/'
-				} catch (e) {
-					console.error(e)
-				}
-
-				console.log('ROOMDATA', roomData)
-				alert('Kamar berhasil dibuat!');
-				window.location.href = 'all_rooms.html';
-			}
-		});
-
-		const fetchUser = async () => {
-			try {
-				const apiUrlResponse = await fetch(`/api_url.txt`)
-				const apiUrl = await apiUrlResponse.text()
-				const apiKey = localStorage.getItem('apiKey')
-				const id = jwt_decode(apiKey).id
-				const response = await fetch(`${apiUrl}/users/${id}/view`, {
-					method: 'get',
-					headers: { authorization: localStorage.getItem('apiKey') },
-				});
-				if (response.status !== 200) throw await response.text()
-				const user = await response.json();
-				const partner = user.partners[0];
-
-				if (partner) {
-					document.querySelector('#user-name').innerText = `${partner.firstName} ${partner.lastName}`;
-					document.querySelector('#username').innerText = user.email;
-				}
-				
-			} catch (e) {
-				console.error(e)
-			}
-		}
-
-		fetchUser();
-		
-		/* Image Upload */
-		// const checkAndAddFile = (file) => {
-		// 	if (file.size > megabytesLimit) {
-		// 		alert(`Ukuran file melebihi batas! Max: 2MB, file yg diupload: ${Math.round(file.size/1024/1024)}MB`)
-		// 	} else {
-		// 		const reader = new FileReader()
-		// 		reader.readAsDataURL(file)
-		// 		reader.onload = () => {
-		// 			const imgResult = reader.result
-		// 			imgResultBase64 = imgResult;
-		// 			document.querySelector('#file-image').src = imgResult;
-		// 			document.querySelector('#file-image').classList.remove('hidden');
-		// 			document.querySelector('#start').classList.add('hidden');
-		// 		}
-		// 		reader.onerror = () => {
-		// 			document.querySelector('#file-image').classList.add('hidden');
-		// 			document.querySelector('#start').classList.remove('hidden');
-		// 		}
-		// 	}
-		// }
-
-		// To be used later
-		// document.querySelector('#file-upload').addEventListener('change', e => {
-		// 	e.preventDefault()
-		// 	checkAndAddFile(e.target.files[0])
-		// });
-
-		// document.querySelector('#clear-img-btn').addEventListener('click', e => {
-		// 	e.preventDefault()
-		// 	imgResultBase64 = ''
-		// 	document.querySelector('#file-image').src = '';
-		// 	document.querySelector('#file-image').classList.add('hidden');
-		// 	document.querySelector('#start').classList.remove('hidden');
-		// })
-
-		// const dropHandler = e => {
-		// 	e.preventDefault();
-		// 	checkAndAddFile(e.dataTransfer.files[0])
-		// }
-
-		// const dragOverHandler = e => {
-		// 	e.preventDefault();
-		// }
 	</script>
 </body>
 
